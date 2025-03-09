@@ -149,9 +149,44 @@
 
 .animate-scroll {
     display: flex;
-    width: 200%; 
+    width: 200%;
     animation: scroll 13s linear infinite;
 }
-.animate-scroll:hover{
+
+.animate-scroll:hover {
     animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .brand-image {
+        width: 150px;
+        height: 150px;
+        margin: 0 10px;
+    }
+    .animate-scroll {
+        animation-duration: 15s; /* Slower animation for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 8px;
+    }
+    .animate-scroll {
+        animation-duration: 18s; /* Even slower animation for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-image {
+        width: 100px;
+        height: 100px;
+        margin: 0 5px;
+    }
+    .animate-scroll {
+        animation-duration: 20s; /* Slowest animation for very small screens */
+    }
 }
