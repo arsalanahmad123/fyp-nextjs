@@ -79,7 +79,7 @@ export const ServicesLayout = () => {
                             alt="Service Image"
                             className="mb-4"
                         />
-                        <h6 className="text-2xl md:text-3xl font-bold">
+                        <h6 className="text-2xl md:text-3xl font-bold transition-colors duration-300 ease-in hover:text-theme2 cursor-pointer">
                             Pick a plan & fall in love!
                         </h6>
                         <p className="text-[16px] mb-4">
