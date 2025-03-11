@@ -165,7 +165,7 @@
         margin: 0 10px;
     }
     .animate-scroll {
-        animation-duration: 15s; /* Slower animation for smaller screens */
+        animation-duration: 15s; 
     }
 }
 
@@ -176,7 +176,7 @@
         margin: 0 8px;
     }
     .animate-scroll {
-        animation-duration: 18s; /* Even slower animation for mobile */
+        animation-duration: 15s; 
     }
 }
 
@@ -187,6 +187,7 @@
         margin: 0 5px;
     }
     .animate-scroll {
-        animation-duration: 20s; /* Slowest animation for very small screens */
+        animation-duration: 20s; 
     }
 }
+

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PlayCircle } from 'lucide-react';
+import {  PlayCircle } from 'lucide-react';
 import {
     Accordion,
     AccordionContent,
@@ -9,6 +9,8 @@ import {
 import { Button } from '@/components/ui/button';
 
 export const AIWriterSection = () => {
+    
+
     return (
         <section className="w-full py-12 md:py-24 lg:py-20 bg-white">
             <div className="container px-4 md:px-6 m-auto">
@@ -16,7 +18,7 @@ export const AIWriterSection = () => {
                     <p className="text-sm font-medium uppercase tracking-wider text-theme">
                         WORKING PROCESS
                     </p>
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mt-2 text-theme2">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-2 text-theme2">
                         How Ai writer works
                     </h2>
                 </div>
@@ -38,13 +40,12 @@ export const AIWriterSection = () => {
                             className="w-full"
                             defaultValue="item-1"
                         >
-                            {/* Item 1 */}
                             <AccordionItem
                                 value="item-1"
-                                className="border-b border-muted cursor-pointer mb-2"
+                                className="border-b border-muted mb-2"
                             >
                                 <div className="flex items-start gap-3">
-                                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-theme text-white font-medium">
+                                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-theme2 text-white font-medium cursor-pointer">
                                         1
                                     </div>
                                     <div className="flex-1">
@@ -61,7 +62,7 @@ export const AIWriterSection = () => {
                                                 </p>
                                                 <Button
                                                     variant="link"
-                                                    className="p-0 h-auto mt-2 text-theme font-medium"
+                                                    className="p-0 h-auto mt-2 text-theme2 font-medium"
                                                 >
                                                     Get Started{' '}
                                                     <span className="ml-1">
@@ -74,17 +75,16 @@ export const AIWriterSection = () => {
                                 </div>
                             </AccordionItem>
 
-                            {/* Item 2 */}
                             <AccordionItem
                                 value="item-2"
                                 className="border-b border-muted mb-2"
                             >
                                 <div className="flex items-start gap-3">
-                                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-900 text-white font-medium">
+                                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-theme2 text-white font-medium cursor-pointer">
                                         2
                                     </div>
                                     <div className="flex-1">
-                                        <AccordionTrigger className="text-left font-semibold text-lg py-2">
+                                        <AccordionTrigger className="text-left font-semibold text-lg py-2 cursor-pointer">
                                             Enter the specifics of your product
                                             or business.
                                         </AccordionTrigger>
@@ -103,17 +103,16 @@ export const AIWriterSection = () => {
                                 </div>
                             </AccordionItem>
 
-                            {/* Item 3 */}
                             <AccordionItem
                                 value="item-3"
                                 className="border-b border-muted"
                             >
                                 <div className="flex items-start gap-3">
-                                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-900 text-white font-medium">
+                                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-theme2 text-white font-medium cursor-pointer">
                                         3
                                     </div>
                                     <div className="flex-1">
-                                        <AccordionTrigger className="text-left font-semibold text-lg py-2">
+                                        <AccordionTrigger className="text-left font-semibold text-lg py-2 cursor-pointer">
                                             See how AI is used to generate
                                             creative content clones.
                                         </AccordionTrigger>
@@ -133,12 +132,11 @@ export const AIWriterSection = () => {
                             </AccordionItem>
                         </Accordion>
 
-                        {/* Button */}
                         <Button
-                            className="cursor-pointer px-8 py-6 hover:bg-theme transition-colors duration-200 ease-in font-semibold"
+                            className="flex items-center gap-2 px-5 py-6 cursor-pointer hover:bg-theme transition-colors duration-200 ease-in font-semibold"
                         >
                             <span>How it Works</span>
-                            <PlayCircle className='h-6 w-6' strokeWidth={3} />
+                            <PlayCircle className="h-4 w-4" />
                         </Button>
                     </div>
                 </div>
@@ -166,4 +164,4 @@ export const AIWriterSection = () => {
             </div>
         </section>
     );
-}
+};
