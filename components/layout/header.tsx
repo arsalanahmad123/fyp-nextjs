@@ -10,7 +10,7 @@ export const Header = () => {
                 <MenuItems />
                 <AuthButtons />
             </div>
-            <div className="min-w-fit bg-black  fixed bottom-7 left-1/2 -translate-x-1/2  rounded-3xl shadow-md md:hidden">
+            <div className="min-w-full bg-black  fixed bottom-0 left-1/2 -translate-x-1/2 shadow-md md:hidden">
                 <MobileMenu />
             </div>
         </>

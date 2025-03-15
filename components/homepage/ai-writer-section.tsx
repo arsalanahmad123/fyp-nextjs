@@ -62,10 +62,10 @@ export const AIWriterSection = () => {
                                                 </p>
                                                 <Button
                                                     variant="link"
-                                                    className="p-0 h-auto mt-2 text-theme2 font-medium"
+                                                    className="p-0 h-auto mt-2 text-theme2 font-medium cursor-pointer"
                                                 >
                                                     Get Started{' '}
-                                                    <span className="ml-1">
+                                                    <span >
                                                         →
                                                     </span>
                                                 </Button>
@@ -142,8 +142,8 @@ export const AIWriterSection = () => {
                 </div>
 
                 {/* Counter section */}
-                <div className="mt-20 flex flex-col md:flex-row items-center justify-center gap-6">
-                    <div className="text-center ">
+                <div className="mt-20 flex flex-col md:flex-row md:items-center md:justify-center gap-6">
+                    <div className="md:text-center text-left">
                         <h3 className="text-6xl md:text-7xl lg:text-8xl font-bold">
                             0+
                         </h3>
