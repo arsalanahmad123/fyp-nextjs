@@ -73,7 +73,7 @@ export const AIWriterSection = () => {
 
     return (
         <section className="w-full py-12 md:py-24 lg:py-20 bg-white">
-            <div className="container px-4 md:px-6 m-auto">
+            <div className="container px-5 md:px-6 m-auto">
                 <div className="text-center mb-10">
                     <p className="text-sm font-medium uppercase tracking-wider text-theme">
                         WORKING PROCESS

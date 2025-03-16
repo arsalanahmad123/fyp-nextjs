@@ -7,7 +7,7 @@ export const Hero = () => {
     return (
         <section
             id="hero__main"
-            className="max-h-[120svh] flex flex-col items-center w-full pt-24 container px-3 m-auto"
+            className="max-h-[120svh] flex flex-col md:items-center items-start w-full pt-24 container px-3 m-auto"
         >
             <h6 className="text-theme font-semibold text-[15px] mb-5 max-w-7xl lg:text-center text-left">
                 Create High-Impact Content in Seconds—Powered by AI, Perfected
@@ -22,14 +22,14 @@ export const Hero = () => {
                     className="opacity-80"
                 />
             </div>
-            <h1 className="font-bold text-5xl md:text-6xl lg:text-8xl max-w-5xl md:text-center drop-shadow-lg text-theme2 ">
+            <h1 className="font-extrabold text-5xl md:text-6xl lg:text-8xl max-w-5xl md:text-center drop-shadow-lg text-theme2 ">
                 Effortless SEO Content Generation
             </h1>
             <p className="text-theme2 font-medium text-[18px] mt-5 mb-7">
                 Create high-quality content with ease. Join the #1 platform for
                 smarter writing.
             </p>
-            <Button className="p-6 cursor-pointer hover:bg-theme transition duration-300 ease-in">
+            <Button className="p-6 cursor-pointer hover:bg-theme transition duration-300 ease-in text-left">
                 <Link href={'#'} className="font-semibold text-[15px]">
                     Sign up for free
                 </Link>

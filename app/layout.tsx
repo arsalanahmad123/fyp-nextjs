@@ -3,6 +3,7 @@ import { DM_Sans,Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/header';
 import { TopHeader } from '@/components/layout/top-header';
+import Footer from '@/components/layout/footer';
 
 const dmSans = DM_Sans({
     variable: '--font-dm-sans',
@@ -29,6 +30,7 @@ export default function RootLayout({
                 <TopHeader />
                 <Header />
                 <main>{children}</main>
+                <Footer />
             </body>
         </html>
     );

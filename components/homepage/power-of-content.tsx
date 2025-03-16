@@ -6,7 +6,7 @@ import QuoteSection from './quote-section';
 
 export const PowerOfContent = () => {
   return (
-      <div className="min-h-[100svh] bg-gradient-to-r from-[#DBF1C3] to-[#DCE7E3] rounded-tl-[40px] rounded-tr-[40px] flex flex-col  items-center md:pt-28 pt-16 gap-5">
+      <div className="min-h-[100svh] bg-gradient-to-r from-[#DBF1C3] to-[#DCE7E3] rounded-tl-[40px] rounded-tr-[40px] flex flex-col  items-center md:pt-28 pt-16 gap-5 px-5 md:px-0">
           <h6 className="md:text-[20px] text-sm font-bold text-theme text-center">
               Descripto HELP YOU TO GENERATE COTENT FAST
           </h6>

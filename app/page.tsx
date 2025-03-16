@@ -1,4 +1,6 @@
 import { AIWriterSection } from "@/components/homepage/ai-writer-section";
+import CTASection from "@/components/homepage/cta";
+import FAQSection from "@/components/homepage/faq";
 import { Hero } from "@/components/homepage/hero";
 import { PowerOfContent } from "@/components/homepage/power-of-content";
 import PricingSection from "@/components/homepage/pricing";
@@ -12,6 +14,8 @@ export default function Home() {
         <AIWriterSection />
         <PowerOfContent />
         <PricingSection />
+        <FAQSection />
+        <CTASection />
     </>
   );
 }

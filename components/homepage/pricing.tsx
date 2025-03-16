@@ -17,7 +17,7 @@ export default function PricingSection() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mx-auto">
                         {/* Free Plan */}
-                        <div className="flex flex-col rounded-lg bg-gray-50 p-6 lg:min-h-[500px] mx-auto w-full group hover:bg-theme2 hover:text-white transition-colors duration-300 ease-in">
+                        <div className="flex flex-col rounded-lg bg-gray-50 p-6 lg:min-h-[500px] mx-auto w-full group hover:bg-theme2 hover:text-white transition-colors duration-500 ease-in">
                             <div className="space-y-4 text-left">
                                 <h3 className="text-2xl lg:text-3xl font-bold">
                                     Free Plan
@@ -73,7 +73,7 @@ export default function PricingSection() {
                         </div>
 
                         {/* Pro Plan */}
-                        <div className="flex flex-col rounded-lg bg-gray-50 p-6 lg:min-h-[500px] mx-auto w-full group hover:bg-theme2 hover:text-white transition-colors duration-300 ease-in">
+                        <div className="flex flex-col rounded-lg bg-gray-50 p-6 lg:min-h-[500px] mx-auto w-full group hover:bg-theme2 hover:text-white transition-colors duration-500 ease-in">
                             <div className="space-y-4 text-left">
                                 <h3 className="text-2xl lg:text-3xl font-bold">
                                     Pro
@@ -129,7 +129,7 @@ export default function PricingSection() {
                         </div>
 
                         {/* Team Plan */}
-                        <div className="flex flex-col rounded-lg bg-gray-50 p-6 lg:min-h-[500px] mx-auto w-full group hover:bg-theme2 hover:text-white transition-colors duration-300 ease-in md:col-span-3 lg:col-span-1">
+                        <div className="flex flex-col rounded-lg bg-gray-50 p-6 lg:min-h-[500px] mx-auto w-full group hover:bg-theme2 hover:text-white transition-colors duration-500 ease-in md:col-span-3 lg:col-span-1">
                             <div className="space-y-4 text-left">
                                 <h3 className="text-2xl lg:text-3xl font-bold">
                                     Team

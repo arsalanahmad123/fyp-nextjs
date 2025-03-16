@@ -1,6 +1,6 @@
 export default function QuoteSection() {
     return (
-        <div className="bg-theme2 lg:min-h-[70svh] text-white py-32 flex flex-col justify-center items-center rounded-tl-[40px] rounded-tr-[40px] w-full relative overflow-hidden">
+        <div className="bg-theme2 min-h-[50svh] lg:min-h-[90svh] text-white py-32 flex flex-col justify-center items-center rounded-tl-[40px] rounded-tr-[40px] w-full relative overflow-hidden mt-24 -mx-5 md:mx-0">
             {/* Shadow div with a cool gradient */}
             <div
                 aria-hidden="true"
@@ -16,10 +16,10 @@ export default function QuoteSection() {
             </div>
 
             {/* Content */}
-            <h2 className="text-4xl lg:text-6xl font-bold mb-10 text-center relative z-10 drop-shadow-xl">
+            <h2 className="text-3xl lg:text-6xl font-bold mb-10 text-center relative z-10 drop-shadow-xl">
                 What Our Clients Say
             </h2>
-            <p className="text-2xl lg:text-3xl italic font-serif lg:max-w-4xl max-w-2xl mx-auto text-center relative z-10 tracking-wide leading-relaxed">
+            <p className="text-xl lg:text-3xl italic font-serif lg:max-w-4xl max-w-96 mx-auto text-center relative z-10 tracking-wide leading-relaxed">
                 &quot;Descripto transformed the way we create content! The
                 AI-generated articles are not just SEO-friendly but also
                 <strong className="font-semibold">
