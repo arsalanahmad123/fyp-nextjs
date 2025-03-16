@@ -1,5 +1,8 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import {  PlayCircle } from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 import {
     Accordion,
     AccordionContent,
@@ -9,7 +12,64 @@ import {
 import { Button } from '@/components/ui/button';
 
 export const AIWriterSection = () => {
-    
+    const [count, setCount] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const counterRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect(); 
+                }
+            },
+            {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5, 
+            }
+        );
+
+        if (counterRef.current) {
+            observer.observe(counterRef.current);
+        }
+
+        return () => {
+            if (observer) {
+                observer.disconnect();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isVisible) {
+            const targetValue = 100; 
+            const duration = 3000; 
+            const startTime = performance.now();
+
+            const easeOutQuad = (t: number) => {
+                return t * (2 - t);
+            };
+
+            const updateCount = (currentTime: number) => {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easedProgress = easeOutQuad(progress); 
+                const currentCount = Math.floor(easedProgress * targetValue);
+
+                setCount(currentCount);
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount); 
+                } else {
+                    setCount(targetValue); 
+                }
+            };
+
+            requestAnimationFrame(updateCount);
+        }
+    }, [isVisible]);
 
     return (
         <section className="w-full py-12 md:py-24 lg:py-20 bg-white">
@@ -64,10 +124,7 @@ export const AIWriterSection = () => {
                                                     variant="link"
                                                     className="p-0 h-auto mt-2 text-theme2 font-medium cursor-pointer"
                                                 >
-                                                    Get Started{' '}
-                                                    <span >
-                                                        →
-                                                    </span>
+                                                    Get Started <span>→</span>
                                                 </Button>
                                             </div>
                                         </AccordionContent>
@@ -132,9 +189,7 @@ export const AIWriterSection = () => {
                             </AccordionItem>
                         </Accordion>
 
-                        <Button
-                            className="flex items-center gap-2 px-5 py-6 cursor-pointer hover:bg-theme transition-colors duration-200 ease-in font-semibold"
-                        >
+                        <Button className="flex items-center gap-2 px-5 py-6 cursor-pointer hover:bg-theme transition-colors duration-200 ease-in font-semibold">
                             <span>How it Works</span>
                             <PlayCircle className="h-4 w-4" />
                         </Button>
@@ -142,10 +197,13 @@ export const AIWriterSection = () => {
                 </div>
 
                 {/* Counter section */}
-                <div className="mt-20 flex flex-col md:flex-row md:items-center md:justify-center gap-6">
+                <div
+                    ref={counterRef}
+                    className="mt-20 flex flex-col md:flex-row md:items-center md:justify-center gap-6"
+                >
                     <div className="md:text-center text-left">
                         <h3 className="text-6xl md:text-7xl lg:text-8xl font-bold">
-                            0+
+                            {count}+
                         </h3>
                         <p className="text-lg md:text-xl font-medium mt-2">
                             Professional & Teams Choose Descripto
