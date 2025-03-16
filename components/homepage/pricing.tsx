@@ -27,7 +27,7 @@ export default function PricingSection() {
                                 </p>
 
                                 <Button
-                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer"
+                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme"
                                     variant="default"
                                 >
                                     Sign up for free
@@ -83,7 +83,7 @@ export default function PricingSection() {
                                 </p>
 
                                 <Button
-                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer"
+                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme"
                                     variant="default"
                                 >
                                     Sign up for free
@@ -139,7 +139,7 @@ export default function PricingSection() {
                                 </p>
 
                                 <Button
-                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer"
+                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme"
                                     variant="default"
                                 >
                                     Sign up for free
