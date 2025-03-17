@@ -10,7 +10,6 @@ import {
     Home,
     Star,
     DollarSign,
-    Phone,
     User,
     Settings,
     LogOut,
