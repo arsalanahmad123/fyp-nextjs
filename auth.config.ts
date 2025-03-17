@@ -13,9 +13,6 @@ export default {
         strategy: 'jwt',
     },
     secret: process.env.AUTH_SECRET,
-    callbacks: {
-        
-    }
 } satisfies NextAuthConfig;
 
 
