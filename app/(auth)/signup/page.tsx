@@ -38,7 +38,7 @@ const Signin = () => {
     };
 
     return (
-        <div className="min-h-[80svh] flex items-start justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-[80svh] flex items-start justify-center lg:pt-20 pt-10 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full space-y-8">
                 <div className="text-center ">
                     <p className="text-lg font-medium text-theme">WELCOME!</p>
