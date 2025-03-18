@@ -151,12 +151,8 @@ const Signin = () => {
                                 </div>
                             </div>
 
-                            <Button
-                                type="submit"
-                                className="w-full bg-black hover:bg-theme text-white py-6 flex items-center justify-center gap-2 text-[17px] cursor-pointer transition-colors duration-200 ease-in"
-                                asChild
-                            >
-                                <span>
+                            <Button className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in">
+                                <span className="flex items-center justify-center gap-2">
                                     Sign in with Descripto{' '}
                                     <ArrowRight size={18} strokeWidth={3} />
                                 </span>
@@ -175,7 +171,7 @@ const Signin = () => {
                         variant="outline"
                         className="w-full py-6 flex items-center justify-center gap-2 mt-4 hover:bg-theme transition-colors duration-200 ease-in text-[17px] hover:text-white cursor-pointer"
                     >
-                            Sign in with Google
+                        Sign in with Google
                         <svg className="h-5 w-5" viewBox="0 0 24 24">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

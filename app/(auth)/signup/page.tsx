@@ -166,10 +166,9 @@ const Signin = () => {
 
                             <Button
                                 type="submit"
-                                className="w-full bg-black hover:bg-theme text-white py-6 flex items-center justify-center gap-2 text-[17px] cursor-pointer transition-colors duration-200 ease-in"
-                                asChild
+                                className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in"
                             >
-                                <span>
+                                <span className="flex items-center justify-center gap-2">
                                     Sign in with Descripto{' '}
                                     <ArrowRight size={18} strokeWidth={3} />
                                 </span>
@@ -217,7 +216,7 @@ const Signin = () => {
                                 href="/signin"
                                 className="text-gray-800 font-medium hover:text-gray-900"
                             >
-                                Login 
+                                Login
                             </Link>
                         </p>
                     </div>
