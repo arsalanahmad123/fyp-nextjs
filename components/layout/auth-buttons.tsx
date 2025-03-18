@@ -1,4 +1,5 @@
-import { Button } from "../ui/button"
+import Link from 'next/link';
+import { Button } from '../ui/button';
 
 export const AuthButtons = () => {
     return (
@@ -7,13 +8,11 @@ export const AuthButtons = () => {
                 variant={'outline'}
                 className="font-semibold cursor-pointer hover:bg-accent-foreground hover:text-white transition duration-300 "
             >
-                Login
+                <Link href={'/signin'}>Login</Link>
             </Button>
-            <Button
-                className="font-semibold cursor-pointer hover:bg-theme hover:text-white transition duration-300 "
-            >
+            <Button className="font-semibold cursor-pointer hover:bg-theme hover:text-white transition duration-300 ">
                 Signup
             </Button>
         </div>
     );
-}
+};

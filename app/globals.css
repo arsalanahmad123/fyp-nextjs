@@ -44,6 +44,7 @@
     --radius-xl: calc(var(--radius) + 4px);
     --color-theme: oklch(74.7% 0.1557 35.71);
     --color-theme2: oklch(17.56% 0.0063 300.91);
+    --color-theme3: #f8f6f9;
     --font-dm-sans: 'DM Sans', sans-serif;
 }
 

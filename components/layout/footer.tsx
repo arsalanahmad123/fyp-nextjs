@@ -1,10 +1,18 @@
+'use client';
 import Link from 'next/link';
 import { Facebook, Twitter, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+
+
+    const pathname = usePathname();
+
+    if (pathname === '/signin' || pathname === '/signup') return null;
+
     return (
         <footer className="bg-white py-12 ">
             <div className="container mx-auto px-4 md:px-6">
@@ -21,21 +29,21 @@ export default function Footer() {
                         <div className="flex space-x-4 mt-4 mb-6">
                             <Link
                                 href="#"
-                                className="text-gray-500 hover:text-gray-700 transition-colors"
+                                className="text-gray-500 hover:text-theme transition-colors"
                             >
                                 <Facebook size={20} />
                                 <span className="sr-only">Facebook</span>
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-500 hover:text-gray-700 transition-colors"
+                                className="text-gray-500 hover:text-theme transition-colors"
                             >
                                 <Twitter size={20} />
                                 <span className="sr-only">Twitter</span>
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-500 hover:text-gray-700 transition-colors"
+                                className="text-gray-500 hover:text-theme transition-colors"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +65,7 @@ export default function Footer() {
                             </Link>
                             <Link
                                 href="#"
-                                className="text-gray-500 hover:text-gray-700 transition-colors"
+                                className="text-gray-500 hover:text-theme transition-colors"
                             >
                                 <Github size={20} />
                                 <span className="sr-only">GitHub</span>
@@ -67,14 +75,14 @@ export default function Footer() {
 
                     {/* Use Case */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+                        <h3 className="font-semibold text-lg uppercase tracking-wider mb-4">
                             USE CASE
                         </h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Emails
                                 </Link>
@@ -82,7 +90,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Social Media Ads
                                 </Link>
@@ -90,7 +98,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Text Editing
                                 </Link>
@@ -98,7 +106,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Copy Writing
                                 </Link>
@@ -106,7 +114,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Creative Writing
                                 </Link>
@@ -116,14 +124,14 @@ export default function Footer() {
 
                     {/* Solutions */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+                        <h3 className="font-semibold text-lg uppercase tracking-wider mb-4">
                             SOLUTIONS
                         </h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Ecommerce
                                 </Link>
@@ -131,7 +139,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Blogger/Vlogger
                                 </Link>
@@ -139,7 +147,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Small Business
                                 </Link>
@@ -147,7 +155,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     All Solutions
                                 </Link>
@@ -157,14 +165,14 @@ export default function Footer() {
 
                     {/* Resources */}
                     <div className="lg:col-span-2">
-                        <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+                        <h3 className="font-semibold text-lg uppercase tracking-wider mb-4">
                             RESOURCES
                         </h3>
                         <ul className="space-y-2">
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Knowledge Base
                                 </Link>
@@ -172,7 +180,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     What&apos;s New
                                 </Link>
@@ -180,7 +188,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Roadmap
                                 </Link>
@@ -188,7 +196,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Blog
                                 </Link>
@@ -196,7 +204,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     href="#"
-                                    className="text-gray-600 hover:text-gray-900 text-sm"
+                                    className="text-gray-600 hover:text-theme text-[16px] transition-all duration-300 ease-in"
                                 >
                                     Affiliate Program
                                 </Link>
@@ -206,7 +214,7 @@ export default function Footer() {
 
                     {/* Join Community */}
                     <div className="lg:col-span-3">
-                        <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">
+                        <h3 className="font-semibold text-lg uppercase tracking-wider mb-4">
                             JOIN COMMUNITY
                         </h3>
                         <div className="flex flex-col space-y-4">
