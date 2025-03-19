@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
@@ -7,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { ArrowRight, Eye, EyeClosed } from 'lucide-react';
+import { ArrowRight, Eye, EyeClosed, Loader2 } from 'lucide-react';
 import {
     Form,
     FormControl,
@@ -18,14 +17,16 @@ import {
 } from '@/components/ui/form';
 import { signupSchema, type SignupFormValues } from '@/schemas/auth.schema';
 import { useState } from 'react';
+import { signupUser } from '@/actions/signup';
+import { toast } from 'sonner';
 
 const Signin = () => {
     const [showPassword, setShowPassword] = useState(false);
      const form = useForm<SignupFormValues>({
          resolver: zodResolver(signupSchema),
          defaultValues: {
-             name: '',
              username: '',
+             email: '',
              password: '',
              acceptTerms: false,
          },
@@ -33,8 +34,19 @@ const Signin = () => {
 
     const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
-    const onSubmit = (data: SignupFormValues) => {
-        console.log(data);
+
+    const onSubmit = async (data: SignupFormValues) => {
+        try {
+            const response = await signupUser(data);
+
+            if (response.success) {
+                toast.success(response.message);
+            } else if (!response.success) {
+                toast.error(response.message);
+            }
+        } catch{
+            toast.error('Something went wrong, please try again later...');
+        }
     };
 
     return (
@@ -52,19 +64,20 @@ const Signin = () => {
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
+                            autoComplete='off'
                         >
                             <FormField
                                 control={form.control}
-                                name="name"
+                                name="username"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm text-gray-400">
-                                            Name (required)
+                                            Username (required)
                                         </FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                placeholder="Enter Name"
+                                                placeholder="Enter Username"
                                                 className="py-7 bg-white focus-visible:ring-0 border-0 text-[17px]"
                                             />
                                         </FormControl>
@@ -74,16 +87,17 @@ const Signin = () => {
                             />
                             <FormField
                                 control={form.control}
-                                name="username"
+                                name="email"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm text-gray-400">
-                                            Email or Username (required)
+                                            Email (required)
                                         </FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                placeholder="Enter Email or Username"
+                                                type='email'
+                                                placeholder="Enter Email "
                                                 className="py-7 bg-white focus-visible:ring-0 border-0 text-[17px]"
                                             />
                                         </FormControl>
@@ -167,10 +181,12 @@ const Signin = () => {
                             <Button
                                 type="submit"
                                 className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in"
+                                disabled={form.formState.isSubmitting}
                             >
                                 <span className="flex items-center justify-center gap-2">
                                     Sign in with Descripto{' '}
-                                    <ArrowRight size={18} strokeWidth={3} />
+                                    {!form.formState.isSubmitting && <ArrowRight size={18} strokeWidth={3} />}
+                                    {form.formState.isSubmitting && <Loader2 size={18} strokeWidth={3} className='animate-spin' />}
                                 </span>
                             </Button>
                         </form>

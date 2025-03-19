@@ -63,7 +63,7 @@ export default function FAQSection() {
                             <Button
                                 variant={'outline'}
                                 onClick={() => toggleAccordion(index)}
-                                className="flex justify-between items-center w-full py-4 text-left font-semibold md:text-2xl text-lg bg-transparent hover:bg-transparent cursor-pointer shadow-none border-none"
+                                className="flex justify-between items-center w-full py-4 text-left font-semibold md:text-2xl text-sm bg-transparent hover:bg-transparent cursor-pointer shadow-none border-none"
                                 aria-expanded={openIndex === index}
                                 aria-controls={`accordion-content-${index}`}
                             >

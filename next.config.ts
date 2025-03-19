@@ -5,7 +5,13 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
-                pathname: '*/*'
+                pathname: '*/*',
+            },
+            {
+                protocol: 'https',
+                hostname: '**.googleusercontent.com',
+                port: '',
+                search: '',
             },
         ],
     },

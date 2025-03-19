@@ -1,18 +1,12 @@
 import React from 'react';
 import { Loader } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
-interface LoadingScreenProps {
-    isLoading: boolean;
-}
 
-const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
+const LoadingScreen = () => {
     return (
         <div
-            className={cn(
-                'fixed inset-0 z-50 bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center transition-opacity duration-500',
-                isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            )}
+            className={
+                'fixed inset-0 z-50 bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center transition-opacity duration-500'}
         >
             <div className="flex flex-col items-center">
                 <div className="relative">

@@ -24,7 +24,7 @@ const Signin = () => {
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
-            username: '',
+            email: '',
             password: '',
             rememberMe: false,
         },
@@ -56,7 +56,7 @@ const Signin = () => {
                         >
                             <FormField
                                 control={form.control}
-                                name="username"
+                                name="email"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel className="text-sm text-gray-400">
@@ -65,7 +65,7 @@ const Signin = () => {
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                placeholder="Enter Email or Username"
+                                                placeholder="Enter Email"
                                                 className="py-7 bg-white focus-visible:ring-0 border-0 text-[17px]"
                                             />
                                         </FormControl>

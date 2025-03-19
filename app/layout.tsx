@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/layout/header';
 import { TopHeader } from '@/components/layout/top-header';
 import Footer from '@/components/layout/footer';
+import { Toaster } from '@/components/ui/sonner';
 
 const dmSans = DM_Sans({
     variable: '--font-dm-sans',
@@ -29,7 +30,10 @@ export default function RootLayout({
             <body className={`${dmSans.variable} ${InterFont.variable}`}>
                 <TopHeader />
                 <Header />
-                <main>{children}</main>
+                <main>
+                    <Toaster richColors />
+                    {children}
+                </main>
                 <Footer />
             </body>
         </html>
