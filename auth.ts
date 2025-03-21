@@ -5,7 +5,7 @@ import authConfig from './auth.config';
 import Credentials from "next-auth/providers/credentials"
 import { loginSchema } from './schemas/auth.schema';
 import { getUserByEmail } from './lib/common-auth-queries';
-import argon2 from "argon2";
+import bcrypt from "bcryptjs"
 
 
 const adapter = PrismaAdapter(db);
@@ -37,7 +37,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                     throw new Error('Invalid credentials.');
                 }
 
-                const passwordMatch = await argon2.verify(
+                const passwordMatch = await bcrypt.compare(
                     user.password,
                     password
                 );

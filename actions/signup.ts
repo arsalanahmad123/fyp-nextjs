@@ -3,7 +3,7 @@
 import { db } from '@/lib/db';
 import { SignupFormValues, signupSchema } from '@/schemas/auth.schema';
 import { createVerificationToken } from './create-verification-token';
-import argon2 from 'argon2';
+import bcrypt from "bcryptjs"
 import { sendSignupUserEmail } from './send-signup-email';
 
 type Response = {
@@ -40,7 +40,7 @@ export const signupUser = async (
             };
         }
 
-        const hashedPassword = await argon2.hash(values.password);
+        const hashedPassword = await bcrypt.hash(values.password,10);
 
         const user = await db.user.create({
             data: {
