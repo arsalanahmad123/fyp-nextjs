@@ -1,20 +1,19 @@
-import React from 'react';
-import { Loader } from 'lucide-react';
-
+import { Loader2 } from 'lucide-react';
 
 const LoadingScreen = () => {
     return (
-        <div
-            className={
-                'fixed inset-0 z-50 bg-gradient-to-br from-indigo-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center transition-opacity duration-500'}
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-80 backdrop-blur-sm transition-opacity duration-300">
             <div className="flex flex-col items-center">
                 <div className="relative">
-                    <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-indigo-200 dark:border-indigo-800 border-opacity-60 animate-pulse"></div>
-                    <Loader className="w-8 h-8 md:w-12 md:h-12 text-indigo-600 dark:text-indigo-400 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-spin" />
+                    <Loader2 className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 transform text-primary animate-spin sm:h-10 sm:w-10" />
                 </div>
-                <p className="mt-6 text-indigo-600 dark:text-indigo-400 font-medium animate-fade-in text-lg">
-                    Loading<span className="animate-pulse">...</span>
+                <p className="mt-4 text-base font-medium text-primary sm:text-lg">
+                    Loading
+                    <span className="inline-flex animate-pulse">
+                        <span className="mx-[1px]">.</span>
+                        <span className="mx-[1px] animate-delay-200">.</span>
+                        <span className="mx-[1px] animate-delay-400">.</span>
+                    </span>
                 </p>
             </div>
         </div>

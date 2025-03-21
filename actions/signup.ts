@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma } from '@/lib/db';
+import { db } from '@/lib/db';
 import { SignupFormValues, signupSchema } from '@/schemas/auth.schema';
 import { createVerificationToken } from './create-verification-token';
 import argon2 from 'argon2';
@@ -16,9 +16,9 @@ export const signupUser = async (
     values: SignupFormValues
 ): Promise<Response> => {
     try {
-        const parsedValues = signupSchema.parse(values);
+        const parsedValues = signupSchema.safeParse(values);
 
-        if (!parsedValues) {
+        if (!parsedValues.success) {
             return {
                 success: false,
                 status: 400,
@@ -26,7 +26,7 @@ export const signupUser = async (
             };
         }
 
-        const existingUser = await prisma.user.findFirst({
+        const existingUser = await db.user.findFirst({
             where: {
                 email: values.email,
             },
@@ -42,7 +42,7 @@ export const signupUser = async (
 
         const hashedPassword = await argon2.hash(values.password);
 
-        const user = await prisma.user.create({
+        const user = await db.user.create({
             data: {
                 email: values.email,
                 username: values.username,

@@ -19,6 +19,7 @@ import { signupSchema, type SignupFormValues } from '@/schemas/auth.schema';
 import { useState } from 'react';
 import { signupUser } from '@/actions/signup';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const Signin = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -32,6 +33,7 @@ const Signin = () => {
          },
      });
 
+     const router = useRouter()
     const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
 
@@ -41,6 +43,8 @@ const Signin = () => {
 
             if (response.success) {
                 toast.success(response.message);
+                form.reset();
+                router.push('/signin')
             } else if (!response.success) {
                 toast.error(response.message);
             }
@@ -202,6 +206,7 @@ const Signin = () => {
                         type="button"
                         variant="outline"
                         className="w-full py-6 flex items-center justify-center gap-2 mt-4 hover:bg-theme transition-colors duration-200 ease-in text-[17px] hover:text-white cursor-pointer"
+                        disabled={form.formState.isSubmitting}
                     >
                         Sign in with Google
                         <svg className="h-5 w-5" viewBox="0 0 24 24">

@@ -11,7 +11,7 @@ export default function Footer() {
 
     const pathname = usePathname();
 
-    if (pathname === '/signin' || pathname === '/signup') return null;
+    if (pathname === '/signin' || pathname.startsWith('/signup')) return null;
 
     return (
         <footer className="bg-white py-12 ">

@@ -5,9 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { ArrowRight, Eye, EyeClosed } from 'lucide-react';
+import { ArrowRight, Eye, EyeClosed,Loader2 } from 'lucide-react';
 import {
     Form,
     FormControl,
@@ -18,6 +16,9 @@ import {
 } from '@/components/ui/form';
 import { loginSchema, type LoginFormValues } from '@/schemas/auth.schema';
 import { useState } from 'react';
+import { signinUser } from '@/actions/signin';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const Signin = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -26,14 +27,27 @@ const Signin = () => {
         defaultValues: {
             email: '',
             password: '',
-            rememberMe: false,
         },
     });
 
+    const router = useRouter();
     const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
-    const onSubmit = (data: LoginFormValues) => {
-        console.log(data);
+    const onSubmit = async (data: LoginFormValues) => {
+        try {
+            const response = await signinUser(data);
+            if(response.success){
+                form.reset();
+                toast.success("Logged in success")
+                router.replace('/');
+            }
+            else{
+                toast.error(response.message);
+            }
+        } catch (error) {
+            toast.error("Something went wrong...")
+            console.log(error);
+        }
     };
 
     return (
@@ -116,45 +130,31 @@ const Signin = () => {
                                 )}
                             />
 
-                            <div className="flex items-center justify-between">
-                                <FormField
-                                    control={form.control}
-                                    name="rememberMe"
-                                    render={({ field }) => (
-                                        <FormItem className="flex flex-row items-center space-x-1 space-y-0">
-                                            <FormControl>
-                                                <Checkbox
-                                                    checked={field.value}
-                                                    onCheckedChange={
-                                                        field.onChange
-                                                    }
-                                                    id="remember-me"
-                                                    className="bg-white "
-                                                />
-                                            </FormControl>
-                                            <Label
-                                                htmlFor="remember-me"
-                                                className="text-sm text-gray-600 cursor-pointer"
-                                            >
-                                                Remember Me
-                                            </Label>
-                                        </FormItem>
-                                    )}
-                                />
-                                <div className="text-sm">
-                                    <Link
-                                        href="/forgot-password"
-                                        className="text-sm text-gray-800 hover:text-gray-900 hover:underline"
-                                    >
-                                        Forgot Password?
-                                    </Link>
-                                </div>
+                            <div className="text-sm text-right">
+                                <Link
+                                    href="/forgot-password"
+                                    className="text-sm text-gray-800 hover:text-gray-900 hover:underline"
+                                >
+                                    Forgot Password?
+                                </Link>
                             </div>
 
-                            <Button className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in">
+                            <Button
+                                className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in"
+                                disabled={form.formState.isSubmitting}
+                            >
                                 <span className="flex items-center justify-center gap-2">
                                     Sign in with Descripto{' '}
-                                    <ArrowRight size={18} strokeWidth={3} />
+                                    {!form.formState.isSubmitting && (
+                                        <ArrowRight size={18} strokeWidth={3} />
+                                    )}
+                                    {form.formState.isSubmitting && (
+                                        <Loader2
+                                            size={18}
+                                            strokeWidth={3}
+                                            className="animate-spin"
+                                        />
+                                    )}
                                 </span>
                             </Button>
                         </form>
@@ -170,6 +170,7 @@ const Signin = () => {
                         type="button"
                         variant="outline"
                         className="w-full py-6 flex items-center justify-center gap-2 mt-4 hover:bg-theme transition-colors duration-200 ease-in text-[17px] hover:text-white cursor-pointer"
+                        disabled={form.formState.isSubmitting}
                     >
                         Sign in with Google
                         <svg className="h-5 w-5" viewBox="0 0 24 24">

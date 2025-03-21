@@ -1,6 +1,6 @@
 'use server';
 
-import { prisma } from '@/lib/db';
+import { db } from '@/lib/db';
 
 type VerificationToken = {
     identifier: string;
@@ -15,7 +15,7 @@ export const createVerificationToken = async (
     const token = Math.floor(1000 + Math.random() * 9000).toString();
 
     try {
-        const newVerificationToken = await prisma.verificationToken.create({
+        const newVerificationToken = await db.verificationToken.create({
             data: {
                 identifier,
                 expires,

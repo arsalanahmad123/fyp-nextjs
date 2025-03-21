@@ -7,7 +7,7 @@ export const TopHeader = () => {
 
         const pathname = usePathname()
     
-        if(pathname === '/signin' || pathname==='/signup') return null;
+        if(pathname === '/signin' || pathname.startsWith('/signup')) return null;
 
     return (
         <div className="w-full text-center bg-black text-sm p-2">

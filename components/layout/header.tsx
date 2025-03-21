@@ -3,8 +3,7 @@ import { AuthButtons } from './auth-buttons';
 import { MenuItems } from './MenuItems';
 import { MobileMenu } from './mobile-menu';
 
-export const Header = () => {
-
+export const Header = async() => {
 
     return (
         <>
