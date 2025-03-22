@@ -13,36 +13,36 @@ export default {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             allowDangerousEmailAccountLinking: true,
         }),
-         Credentials({
-                    credentials: {
-                        email: {},
-                        password: {},
-                    },
-                    async authorize(credentials) {
-                        const { email, password } = await loginSchema.parseAsync(
-                            credentials
-                        );
-                        const user = await getUserByEmail(email);
-                        if (!user || !user.password) {
-                            throw new Error('Invalid credentials.');
-                        }
-        
-                        const passwordMatch = await bcrypt.compare(
-                            password,
-                            user.password
-                        );
-                        if (passwordMatch)
-                            return {
-                                id: user.id,
-                                email: user.email,
-                                name: user.username,
-                                emailVerified: user.emailVerified,
-                                image: user.image,
-                            };
-        
-                        return null;
-                    },
-                }),
+        Credentials({
+            credentials: {
+                email: {},
+                password: {},
+            },
+            async authorize(credentials) {
+                const { email, password } = await loginSchema.parseAsync(
+                    credentials
+                );
+                const user = await getUserByEmail(email);
+                if (!user || !user.password) {
+                    throw new Error('Invalid credentials.');
+                }
+
+                const passwordMatch = await bcrypt.compare(
+                    password,
+                    user.password
+                );
+                if (passwordMatch)
+                    return {
+                        id: user.id,
+                        email: user.email,
+                        name: user.name,
+                        emailVerified: user.emailVerified,
+                        image: user.image,
+                    };
+
+                return null;
+            },
+        }),
     ],
     callbacks: {
         async signIn({ account, user }) {
@@ -53,16 +53,28 @@ export default {
 
             return true;
         },
-        async jwt({ token, trigger, session,account }) {
+        async jwt({ token, trigger, session, }) {
             if (trigger === 'update') {
                 return { ...token, ...session.user };
             }
-            if (account?.provider === 'credentials') {
-                token.credentials = true;
-            }
+            if (!token.sub) return token;
+            const existingUser = await getUserById(token.sub);
+            if (!existingUser) return token;
+
+
+            token.name = existingUser.name;
+            token.email = existingUser.email;
+            token.image = existingUser.image;
             return token;
         },
-
+        async session({ token,session }) {
+            if (token.sub && session.user) {
+                session.user.id = token.sub;
+                session.user.name = token.name;
+                session.user.email = token.email;
+            }
+            return session;
+        },
     },
 } satisfies NextAuthConfig;
 

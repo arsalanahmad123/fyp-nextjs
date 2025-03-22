@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const loginSchema = z.object({
     email: z.string().min(1, {
-        message: 'username is required'
+        message: 'email is required'
     }),
     password: z.string().min(1, {
     message: 'Password is required',
@@ -12,7 +12,7 @@ export const loginSchema = z.object({
 export type LoginFormValues = z.infer<typeof loginSchema>;
 
 export const signupSchema = z.object({
-    username: z.string().min(1, 'Name is required'),
+    name: z.string().min(1, 'Name is required'),
     email: z.string().email().min(1, 'Email is required'),
     password: z.string().min(1, 'Password is required'),
     acceptTerms: z.boolean().refine((val) => val === true, {

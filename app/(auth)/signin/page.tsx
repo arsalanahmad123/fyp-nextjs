@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { signinUser } from '@/actions/signin';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-
+import { signInWithGoogle } from '@/actions/signin-with-google';
 const Signin = () => {
     const [showPassword, setShowPassword] = useState(false);
     const form = useForm<LoginFormValues>({
@@ -49,6 +49,17 @@ const Signin = () => {
             console.log(error);
         }
     };
+
+    const signinWithGoogle = async () => {
+        try {
+            await signInWithGoogle();
+        } catch (error) {
+            console.error('Google Sign-In Error:', error);
+            toast.error('Something went wrong...');
+        }
+    };
+
+
 
     return (
         <div className="min-h-[80svh] flex items-start justify-center lg:pt-20 pt-10 pb-12 px-4 sm:px-6 lg:px-8">
@@ -171,6 +182,7 @@ const Signin = () => {
                         variant="outline"
                         className="w-full py-6 flex items-center justify-center gap-2 mt-4 hover:bg-theme transition-colors duration-200 ease-in text-[17px] hover:text-white cursor-pointer"
                         disabled={form.formState.isSubmitting}
+                        onClick={() => signinWithGoogle()}
                     >
                         Sign in with Google
                         <svg className="h-5 w-5" viewBox="0 0 24 24">

@@ -27,7 +27,7 @@ export const sendSignupUserEmail = async ({
                     <p style="font-size: 16px; margin: 0 0 20px;">Hi there,</p>
                     <p style="font-size: 16px; margin: 0 0 20px;">Thank you for signing up with Descripto. To get started, please verify your email address by clicking the button below:</p>
                     <div style="text-align: center; margin: 20px 0;">
-                        <a href=${BASE_URL}/auth/signup/verify-email?token=${token} 
+                        <a href=${BASE_URL}/signup/verify-email?token=${token} 
                            style="display: inline-block; padding: 12px 24px; font-size: 16px; color: #fff; background-color: #ff8565; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;">
                             Verify My Email
                         </a>
