@@ -3,5 +3,7 @@
 import { signIn } from "@/auth";
 
 export const signInWithGoogle  = async()=> {
-    await signIn("google")
+    await signIn("google",{
+        redirectTo: '/'
+    })
 }
