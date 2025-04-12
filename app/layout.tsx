@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { DM_Sans,Inter } from 'next/font/google';
+import { DM_Sans, Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/header';
 import { TopHeader } from '@/components/layout/top-header';
 import Footer from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/sonner';
+import { SessionProvider } from 'next-auth/react';
 
 const dmSans = DM_Sans({
     variable: '--font-dm-sans',
@@ -12,7 +13,7 @@ const dmSans = DM_Sans({
 });
 const InterFont = Inter({
     variable: '--font-inter',
-    subsets: ['cyrillic']
+    subsets: ['cyrillic'],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export default function RootLayout({
                 <Header />
                 <main>
                     <Toaster richColors />
-                    {children}
+                    <SessionProvider>{children}</SessionProvider>
                 </main>
                 <Footer />
             </body>

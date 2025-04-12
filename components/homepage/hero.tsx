@@ -30,7 +30,7 @@ export const Hero = () => {
                 smarter writing.
             </p>
             <Button className="p-6 cursor-pointer hover:bg-theme transition duration-300 ease-in text-left">
-                <Link href={'#'} className="font-semibold text-[15px]">
+                <Link href={'/signup'} className="font-semibold text-[15px]">
                     Sign up for free
                 </Link>
                 <ArrowRight strokeWidth={4} />
