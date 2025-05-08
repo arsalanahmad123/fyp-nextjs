@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 interface Props {
     children: React.ReactNode
 }
+import { DashboardSidebar } from '@/components/dashboard/dashboard-sidebar';
 
 
 export default async function DashboardLayout({children}: Props){
@@ -13,8 +14,9 @@ export default async function DashboardLayout({children}: Props){
     if(!session?.user) return redirect('/');
 
     return(
-        <main>
-            {children}
-        </main>
+        <div className="flex min-h-screen">
+      <DashboardSidebar />
+      <main className="flex-1 overflow-y-auto bg-background">{children}</main>
+    </div>
     )
 }

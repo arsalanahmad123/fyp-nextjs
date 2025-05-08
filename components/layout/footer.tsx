@@ -7,11 +7,14 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { usePathname } from 'next/navigation';
 
 export default function Footer() {
-
-
     const pathname = usePathname();
 
-    if (pathname === '/signin' || pathname.startsWith('/signup')) return null;
+    if (
+        pathname === '/signin' ||
+        pathname.startsWith('/signup') ||
+        pathname.startsWith('/dashboard')
+    )
+        return null;
 
     return (
         <footer className="bg-white py-12 ">

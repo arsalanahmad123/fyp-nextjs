@@ -6,6 +6,7 @@ import { TopHeader } from '@/components/layout/top-header';
 import Footer from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/sonner';
 import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth';
 
 const dmSans = DM_Sans({
     variable: '--font-dm-sans',
@@ -21,21 +22,25 @@ export const metadata: Metadata = {
     description: 'Generate fast and optimized SEO content',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const session = await auth();
+
     return (
         <html lang="en">
             <body className={`${dmSans.variable} ${InterFont.variable}`}>
-                <TopHeader />
-                <Header />
-                <main>
-                    <Toaster richColors />
-                    <SessionProvider>{children}</SessionProvider>
-                </main>
-                <Footer />
+                <SessionProvider session={session}>
+                    <TopHeader />
+                    <Header />
+                    <main>
+                        <Toaster richColors />
+                        <SessionProvider>{children}</SessionProvider>
+                    </main>
+                    <Footer />
+                </SessionProvider>
             </body>
         </html>
     );

@@ -1,110 +1,143 @@
-import ContentCard from '@/components/dashboard/content-card';
-import DemoSection from '@/components/dashboard/demo-section';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { RecentGenerations } from '@/components/dashboard/recent-generations';
+import { ContentStats } from '@/components/dashboard/content-stats';
 
-// Mock API response - in a real app, you would fetch this data
-const mockApiResponse = {
-    generatedContent:
-        "### Best Laptops for Students: Top Picks for Every Budget\n\nHey there! If you're a student on the hunt for a new laptop, you know how overwhelming the choices can be. Whether you're writing essays, crunching numbers, or maybe even editing videos, having the right laptop can make all the difference. So, let's dive into some of the best laptops for students, keeping both functionality and budget in mind.\n\n#### 1. **Best Overall: MacBook Air**\n",
-    seoScore: 90,
-    keywordDensity: '2.04',
-    wordCount: 392,
-    readability: 68.5,
-};
-
-// Function to extract title from markdown content
-function extractTitle(content: string) {
-    const titleMatch = content.match(/###\s+(.*)/);
-    return titleMatch ? titleMatch[1] : 'Untitled Content';
-}
-
-// Function to extract a brief excerpt from content
-function extractExcerpt(content: string, maxLength = 100) {
-    // Remove markdown headers and formatting
-    const plainText = content
-        .replace(/#{1,6}\s+/g, '')
-        .replace(/\*\*/g, '')
-        .replace(/\n\n/g, ' ')
-        .split('\n')[0]; // Get first paragraph
-
-    if (plainText.length <= maxLength) return plainText;
-    return plainText.substring(0, maxLength) + '...';
-}
-
-// Create multiple content items for demonstration
-const contentItems = Array(6)
-    .fill(null)
-    .map((_, index) => ({
-        id: index + 1,
-        ...mockApiResponse,
-        title: extractTitle(mockApiResponse.generatedContent),
-        excerpt: extractExcerpt(mockApiResponse.generatedContent),
-    }));
-
-export default function Home() {
+export default function DashboardPage() {
     return (
-        <main className="container mx-auto px-4 py-12 max-w-7xl">
-            <section className="mb-16">
-                <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-3xl font-bold ">Generated Content</h2>
-                    <Link href="/all-content" className="cursor-pointer">
-                        <Button className="p-4 h-auto flex items-center gap-2 cursor-pointer font-semibold text-[16px] ">
-                            View All
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                    </Link>
-                </div>
+        <div className="flex flex-col gap-6 p-6 max-w-10/12 mx-auto">
+            <div className="flex flex-col gap-2">
+                <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+                <p className="text-muted-foreground">
+                    Welcome to your SEO content generation dashboard.
+                </p>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {contentItems.slice(0, 3).map((item) => (
-                        <ContentCard
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            excerpt={item.excerpt}
-                            seoScore={item.seoScore}
-                            wordCount={item.wordCount}
-                            readability={item.readability}
-                        />
-                    ))}
-                </div>
-            </section>
-
-            <DemoSection />
-
-            <section className="mt-16">
-                <h2 className="text-3xl font-bold mb-8 ">More Content</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {contentItems.slice(3, 6).map((item) => (
-                        <ContentCard
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            excerpt={item.excerpt}
-                            seoScore={item.seoScore}
-                            wordCount={item.wordCount}
-                            readability={item.readability}
-                        />
-                    ))}
-                </div>
-
-                <div className="mt-12 flex justify-center">
-                    <Link href="/all-content">
-                        <Card className="overflow-hidden ">
-                            <Button
-                                variant="ghost"
-                                className="px-8 py-6 h-auto flex items-center gap-2 "
-                            >
-                                Explore All Content
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </Button>
+            <Tabs defaultValue="overview" className="space-y-4">
+                <TabsList>
+                    <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                    <TabsTrigger value="reports">Reports</TabsTrigger>
+                </TabsList>
+                <TabsContent value="overview" className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">
+                                    Total Content
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">142</div>
+                                <p className="text-xs text-muted-foreground">
+                                    +20% from last month
+                                </p>
+                            </CardContent>
                         </Card>
-                    </Link>
-                </div>
-            </section>
-        </main>
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">
+                                    Generated This Month
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">24</div>
+                                <p className="text-xs text-muted-foreground">
+                                    +12% from last month
+                                </p>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">
+                                    Average Word Count
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">1,245</div>
+                                <p className="text-xs text-muted-foreground">
+                                    +5% from last month
+                                </p>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium">
+                                    SEO Score
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">87%</div>
+                                <p className="text-xs text-muted-foreground">
+                                    +2% from last month
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+                        <Card className="col-span-4">
+                            <CardHeader>
+                                <CardTitle>Content Performance</CardTitle>
+                            </CardHeader>
+                            <CardContent className="pl-2">
+                                <ContentStats />
+                            </CardContent>
+                        </Card>
+                        <Card className="col-span-3">
+                            <CardHeader>
+                                <CardTitle>Recent Generations</CardTitle>
+                                <CardDescription>
+                                    Your recently generated content
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <RecentGenerations />
+                            </CardContent>
+                        </Card>
+                    </div>
+                </TabsContent>
+                <TabsContent value="analytics" className="space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Analytics</CardTitle>
+                            <CardDescription>
+                                Detailed analytics for your content performance
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="h-[400px] w-full rounded-md border border-dashed flex items-center justify-center">
+                                <p className="text-muted-foreground">
+                                    Analytics dashboard coming soon
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+                <TabsContent value="reports" className="space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Reports</CardTitle>
+                            <CardDescription>
+                                Generate and view reports for your content
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="h-[400px] w-full rounded-md border border-dashed flex items-center justify-center">
+                                <p className="text-muted-foreground">
+                                    Reports dashboard coming soon
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </TabsContent>
+            </Tabs>
+        </div>
     );
 }

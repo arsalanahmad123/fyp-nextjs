@@ -3,11 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const TopHeader = () => {
-
-
         const pathname = usePathname()
     
-        if(pathname === '/signin' || pathname.startsWith('/signup')) return null;
+        if(pathname === '/signin' || pathname.startsWith('/signup') || pathname.startsWith('/dashboard')) return null;
 
     return (
         <div className="w-full text-center bg-black text-sm p-2">

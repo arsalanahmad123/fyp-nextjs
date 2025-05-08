@@ -23,6 +23,8 @@ export async function signinUser(values: LoginFormValues): Promise<Response> {
             };
         }
 
+        console.log(values)
+
         await signIn('credentials', {
             ...values,
             redirect: false, 

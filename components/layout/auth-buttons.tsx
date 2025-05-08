@@ -1,8 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import { Button, buttonVariants } from '../ui/button';
 import { cn } from '@/lib/utils';
-import { auth } from '@/auth';
-import { signOut } from '@/auth';
+import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { LogOut } from 'lucide-react';
 import {
     Menubar,
@@ -14,13 +16,12 @@ import {
 import { Separator } from '../ui/separator';
 
 async function handleSignOut() {
-    'use server';
-    await signOut();
+    signOut();
     window.location.href = '/';
 }
 
-export const AuthButtons = async () => {
-    const session = await auth();
+export const AuthButtons = () => {
+    const { data: session } = useSession();
 
     const isLoggedIn = !!session?.user;
 
