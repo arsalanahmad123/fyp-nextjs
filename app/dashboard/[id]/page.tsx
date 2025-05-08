@@ -12,14 +12,13 @@ import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, Copy, Download, Edit, Share2 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function ContentDetailPage({
-    params,
-}: {
-    params: { id: string };
-}) {
+export default async function ContentDetailPage({ params }: { params: Promise<{ id: string }> ;}) {
+
+
+    const { id } = await params;
     // This would normally fetch the content based on the ID
     const content = {
-        id: params.id,
+        id,
         title: '10 SEO Tips for E-commerce',
         platform: 'Blog',
         date: 'July 15, 2023',
