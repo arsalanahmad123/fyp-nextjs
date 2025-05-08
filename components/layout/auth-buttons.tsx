@@ -16,7 +16,7 @@ import {
 import { Separator } from '../ui/separator';
 
 async function handleSignOut() {
-    signOut();
+    await signOut();
     window.location.href = '/';
 }
 
