@@ -13,10 +13,12 @@ export default async function DashboardLayout({children}: Props){
 
     if(!session?.user) return redirect('/');
 
-    return(
-        <div className="flex min-h-screen">
-      <DashboardSidebar />
-      <main className="flex-1 overflow-y-auto bg-background">{children}</main>
-    </div>
-    )
+    return (
+        <div className="flex h-screen bg-[var(--color-theme3)]">
+            <DashboardSidebar />
+            <main className="flex-1 overflow-y-auto bg-background">
+                {children}
+            </main>
+        </div>
+    );
 }

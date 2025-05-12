@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { ArrowRight, Eye, EyeClosed, Loader2 } from 'lucide-react';
+import { signInWithGoogle } from '@/actions/signin-with-google';
 import {
     Form,
     FormControl,
@@ -53,6 +54,16 @@ const Signin = () => {
         }
     };
 
+    const signinWithGoogle = async () => {
+            try {
+                await signInWithGoogle();
+            } catch (error) {
+                console.error('Google Sign-In Error:', error);
+                toast.error('Something went wrong...');
+            }
+        };
+    
+
     return (
         <div className="min-h-[80svh] flex items-start justify-center lg:pt-20 pt-10 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full space-y-8">
@@ -68,7 +79,7 @@ const Signin = () => {
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
                             className="space-y-6"
-                            autoComplete='off'
+                            autoComplete="off"
                         >
                             <FormField
                                 control={form.control}
@@ -100,7 +111,7 @@ const Signin = () => {
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                type='email'
+                                                type="email"
                                                 placeholder="Enter Email "
                                                 className="py-7 bg-white focus-visible:ring-0 border-0 text-[17px]"
                                             />
@@ -189,8 +200,16 @@ const Signin = () => {
                             >
                                 <span className="flex items-center justify-center gap-2">
                                     Sign in with Descripto{' '}
-                                    {!form.formState.isSubmitting && <ArrowRight size={18} strokeWidth={3} />}
-                                    {form.formState.isSubmitting && <Loader2 size={18} strokeWidth={3} className='animate-spin' />}
+                                    {!form.formState.isSubmitting && (
+                                        <ArrowRight size={18} strokeWidth={3} />
+                                    )}
+                                    {form.formState.isSubmitting && (
+                                        <Loader2
+                                            size={18}
+                                            strokeWidth={3}
+                                            className="animate-spin"
+                                        />
+                                    )}
                                 </span>
                             </Button>
                         </form>
@@ -207,6 +226,7 @@ const Signin = () => {
                         variant="outline"
                         className="w-full py-6 flex items-center justify-center gap-2 mt-4 hover:bg-theme transition-colors duration-200 ease-in text-[17px] hover:text-white cursor-pointer"
                         disabled={form.formState.isSubmitting}
+                        onClick={() => signinWithGoogle()}
                     >
                         Sign in with Google
                         <svg className="h-5 w-5" viewBox="0 0 24 24">

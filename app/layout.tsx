@@ -31,7 +31,12 @@ export default async function RootLayout({
 
     return (
         <html lang="en">
-            <body className={`${dmSans.variable} ${InterFont.variable}`}>
+            <body
+                className={`${dmSans.variable} ${InterFont.variable}`}
+                data-new-gr-c-s-check-loaded="8.929.0"
+                data-gr-ext-installed=""
+                cz-shortcut-listen="true"
+            >
                 <SessionProvider session={session}>
                     <TopHeader />
                     <Header />

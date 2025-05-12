@@ -2,6 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+import { Button } from '../ui/button';
 import {
     LayoutDashboard,
     History,
@@ -13,7 +15,13 @@ import {
 } from 'lucide-react';
 
 export function DashboardSidebar() {
+    
     const pathname = usePathname();
+
+    const handleSignOut = async() =>{
+        await signOut();
+        window.location.href="/";
+    }
     
 
     const menuItems = [
@@ -100,13 +108,13 @@ export function DashboardSidebar() {
                         </Link>
                     </li>
                     <li>
-                        <Link
-                            href="/logout"
-                            className="flex items-center px-4 py-3 text-sm hover:text-white hover:bg-[var(--destructive)] hover:bg-opacity-10 duration-200"
+                        <Button
+                            className="w-full text-black flex items-center justify-start px-4 py-3 text-sm hover:text-white bg-transparent hover:bg-red-500 transition-colors duration-200 ease-inv0 cursor-pointer text-left rounded-none group"
+                            onClick={handleSignOut}
                         >
-                            <LogOut className="h-5 w-5 mr-3 " />
-                            <span className="font-dm-sans">Logout</span>
-                        </Link>
+                            <LogOut className="h-5 w-5 mr-3 ml-2 text-theme group-hover:text-white" />
+                            <span className="font-dm-sans font-semibold">Logout</span>
+                        </Button>
                     </li>
                 </ul>
             </div>
