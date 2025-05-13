@@ -18,7 +18,6 @@ import { loginSchema, type LoginFormValues } from '@/schemas/auth.schema';
 import { useState } from 'react';
 import { signinUser } from '@/actions/signin';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 import { signInWithGoogle } from '@/actions/signin-with-google';
 const Signin = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +29,6 @@ const Signin = () => {
         },
     });
 
-    const router = useRouter();
     const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
     const onSubmit = async (data: LoginFormValues) => {
@@ -39,7 +37,7 @@ const Signin = () => {
             if(response.success){
                 form.reset();
                 toast.success("Logged in success")
-                router.replace('/');
+                window.location.href="/dashboard";
             }
             else{
                 toast.error(response.message);
@@ -141,14 +139,14 @@ const Signin = () => {
                                 )}
                             />
 
-                            <div className="text-sm text-right">
+                            {/* <div className="text-sm text-right">
                                 <Link
                                     href="/forgot-password"
                                     className="text-sm text-gray-800 hover:text-gray-900 hover:underline"
                                 >
                                     Forgot Password?
                                 </Link>
-                            </div>
+                            </div> */}
 
                             <Button
                                 className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in"

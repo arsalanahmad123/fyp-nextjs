@@ -181,12 +181,11 @@ const Signin = () => {
                                                 className="text-sm text-gray-600 cursor-pointer"
                                             >
                                                 I accept{' '}
-                                                <Link
-                                                    href="/terms"
-                                                    className="text-gray-800 hover:underline"
+                                                <span
+                                                    className="text-gray-800 "
                                                 >
                                                     terms and condition
-                                                </Link>
+                                                </span>
                                             </Label>
                                         </div>
                                     </FormItem>
@@ -199,7 +198,7 @@ const Signin = () => {
                                 disabled={form.formState.isSubmitting}
                             >
                                 <span className="flex items-center justify-center gap-2">
-                                    Sign in with Descripto{' '}
+                                    Sign up with Descripto{' '}
                                     {!form.formState.isSubmitting && (
                                         <ArrowRight size={18} strokeWidth={3} />
                                     )}

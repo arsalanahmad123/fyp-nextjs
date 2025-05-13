@@ -1,6 +1,6 @@
 'use server';
 
-import { transport } from '@/lib/nodemailer';
+import { getTransport } from '@/lib/nodemailer';
 
 export const sendSignupUserEmail = async ({
     email,
@@ -12,7 +12,7 @@ export const sendSignupUserEmail = async ({
     console.log(`Sending email to ${email} with token ${token}`);
 
     const BASE_URL = process.env.BASE_URL;
-
+    const transport = await getTransport();
     await transport.sendMail({
         from: 'Descripto <no-reply@descripto.com>',
         to: email,

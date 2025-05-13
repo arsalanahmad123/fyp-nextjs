@@ -5,15 +5,16 @@ import { Button, buttonVariants } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
-import { LogOut } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarTrigger,
-} from '@/components/ui/menubar';
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Separator } from '../ui/separator';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 async function handleSignOut() {
     await signOut();
@@ -22,38 +23,65 @@ async function handleSignOut() {
 
 export const AuthButtons = () => {
     const { data: session } = useSession();
+    const [isMounted, setIsMounted] = useState(false);
+
+    // Prevent hydration errors by only rendering after component is mounted
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const isLoggedIn = !!session?.user;
 
+    // Don't render anything until client-side
+    if (!isMounted) {
+        return null;
+    }
+
     if (isLoggedIn) {
         return (
-            <Menubar>
-                <MenubarMenu>
-                    <MenubarTrigger className="cursor-pointer">
-                        Profile
-                    </MenubarTrigger>
-                    <MenubarContent align="end">
-                        <MenubarItem className="cursor-pointer">
-                            <Link
-                                className="font-semibold w-full bg-transparent text-theme2  group cursor-pointer text-center"
-                                href={'/dashboard'}
-                            >
-                                Dashboard 
-                            </Link>
-                        </MenubarItem>
-                        <Separator className='my-2' />
-                        <MenubarItem className="cursor-pointer">
-                            <Button
-                                className="font-semibold w-full bg-transparent text-theme2 hover:bg-red-500 hover:text-white group cursor-pointer"
-                                onClick={handleSignOut}
-                            >
-                                <LogOut className="h-4 w-4 group-hover:text-white" />
-                                Logout
-                            </Button>
-                        </MenubarItem>
-                    </MenubarContent>
-                </MenubarMenu>
-            </Menubar>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button
+                        variant="ghost"
+                        className="relative h-10 w-10 rounded-full flex items-center justify-center hover:bg-accent"
+                        aria-label="Profile menu"
+                    >
+                        {session?.user?.image ? (
+                            <Image
+                                src={session.user.image || '/placeholder.svg'}
+                                alt={session.user.name || 'User'}
+                                className="h-8 w-8 rounded-full"
+                            />
+                        ) : (
+                            <User className="h-5 w-5" />
+                        )}
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                    <div className="flex flex-col space-y-1 p-2">
+                        <p className="text-sm font-medium">
+                            {session?.user?.name || 'User'}
+                        </p>
+                        <p className="text-xs text-muted-foreground truncate">
+                            {session?.user?.email || ''}
+                        </p>
+                    </div>
+                    <Separator />
+                    <DropdownMenuItem asChild>
+                        <Link href="/dashboard" className="cursor-pointer">
+                            Dashboard
+                        </Link>
+                    </DropdownMenuItem>
+                    <Separator />
+                    <DropdownMenuItem
+                        onClick={handleSignOut}
+                        className="text-red-500 focus:text-red-500 focus:bg-red-50 cursor-pointer"
+                    >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Logout
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
         );
     }
 

@@ -1,9 +1,10 @@
 import { ArrowRight, CheckIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function PricingSection() {
     return (
-        <section className="w-full py-12 md:py-24">
+        <section className="w-full py-12 md:py-24" id='pricing__main'>
             <div className="max-w-7xl px-4 md:px-6 mx-auto">
                 <div className="flex flex-col items-start space-y-4">
                     <div className="space-y-2 w-full text-center mb-10">
@@ -26,16 +27,18 @@ export default function PricingSection() {
                                     Perfect for testing
                                 </p>
 
-                                <Button
-                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme"
-                                    variant="default"
+                                <Link
+                                    href={'/signup'}
+                                    className={`${buttonVariants({
+                                        variant: 'default',
+                                    })}group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme`}
                                 >
                                     Sign up for free
                                     <ArrowRight
                                         className="ml-2 h-4 w-4"
                                         size={18}
                                     />
-                                </Button>
+                                </Link>
 
                                 <div className="mt-4 border-b-2 pb-4 group-hover:border-accent-foreground">
                                     <div className="flex items-baseline">
@@ -82,16 +85,18 @@ export default function PricingSection() {
                                     Ideal for professionals
                                 </p>
 
-                                <Button
-                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme"
-                                    variant="default"
+                                <Link
+                                    href={'/signup'}
+                                    className={`${buttonVariants({
+                                        variant: 'default',
+                                    })}group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme`}
                                 >
                                     Sign up for free
                                     <ArrowRight
                                         className="ml-2 h-4 w-4"
                                         size={18}
                                     />
-                                </Button>
+                                </Link>
 
                                 <div className="mt-4 border-b-2 pb-4 group-hover:border-accent-foreground">
                                     <div className="flex items-baseline">
@@ -138,16 +143,18 @@ export default function PricingSection() {
                                     Best for teams and agencies
                                 </p>
 
-                                <Button
-                                    className="group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme"
-                                    variant="default"
+                                <Link
+                                href={'/signup'}
+                                    className={`${buttonVariants({
+                                        variant: 'default',
+                                    })}group-hover:bg-theme justify-start py-6 font-semibold text-[16px] mt-3 cursor-pointer hover:bg-theme`}
                                 >
                                     Sign up for free
                                     <ArrowRight
                                         className="ml-2 h-4 w-4"
                                         size={18}
                                     />
-                                </Button>
+                                </Link>
 
                                 <div className="mt-4 border-b-2 pb-4 group-hover:border-accent-foreground">
                                     <div className="flex items-baseline">

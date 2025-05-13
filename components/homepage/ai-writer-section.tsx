@@ -10,6 +10,7 @@ import {
     AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export const AIWriterSection = () => {
     const [count, setCount] = useState(0);
@@ -120,12 +121,12 @@ export const AIWriterSection = () => {
                                                     faster with our step-by-step
                                                     AI copywriter.
                                                 </p>
-                                                <Button
-                                                    variant="link"
+                                                <Link
+                                                    href={'/signup'}
                                                     className="p-0 h-auto mt-2 text-theme2 font-medium cursor-pointer"
                                                 >
                                                     Get Started <span>→</span>
-                                                </Button>
+                                                </Link>
                                             </div>
                                         </AccordionContent>
                                     </div>

@@ -5,25 +5,25 @@ export const MenuItems = () => {
         <div className="flex justify-between items-center space-x-16">
             <Link
                 className="text-gray-600 hover:text-black font-medium"
-                href={'/'}
+                href={'#hero__main'}
             >
                 Home
             </Link>
             <Link
                 className="text-gray-600 hover:text-black font-medium"
-                href={'#'}
+                href={'#services__main'}
             >
-                Features
+                Services
             </Link>
             <Link
                 className="text-gray-600 hover:text-black font-medium"
-                href={'#'}
+                href={'#pricing__main'}
             >
                 Pricing
             </Link>
             <Link
                 className="text-gray-600 hover:text-black font-medium"
-                href={'#'}
+                href={'mailto:thepeacedevelopers@gmail.com'}
             >
                 Contact
             </Link>

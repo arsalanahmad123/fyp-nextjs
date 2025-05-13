@@ -1,8 +1,12 @@
+'use client';
+
 import { ArrowRight, Check } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 export default function CTASection() {
+    const router = useRouter();
     return (
         <div className="px-4 sm:px-6 md:px-8 mx-auto -mt-20 mb-12 md:-mt-32 relative z-10 max-w-7xl">
             <div className="bg-black rounded-xl p-6 sm:p-8 md:px-16 lg:px-20 md:py-12 flex flex-col md:flex-row items-center gap-6 md:gap-12 relative overflow-hidden shadow-2xl transform transition-transform hover:scale-[1.01] duration-300">
@@ -60,7 +64,9 @@ export default function CTASection() {
 
                 {/* Button */}
                 <div className="z-10 w-full md:w-auto md:absolute md:right-16 lg:right-20 md:top-1/2 md:-translate-y-1/2">
-                    <Button className="w-full md:w-auto bg-white text-black transition-all duration-300 ease-in-out px-8 sm:px-10 py-6 cursor-pointer font-semibold text-[16px] hover:bg-theme hover:text-white hover:shadow-lg hover:shadow-theme/20 group">
+                    <Button className="w-full md:w-auto bg-white text-black transition-all duration-300 ease-in-out px-8 sm:px-10 py-6 cursor-pointer font-semibold text-[16px] hover:bg-theme hover:text-white hover:shadow-lg hover:shadow-theme/20 group"
+                    onClick={() => router.push('/signup')}
+                    >
                         Sign up for free
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Button>
