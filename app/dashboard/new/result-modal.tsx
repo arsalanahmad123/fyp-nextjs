@@ -70,14 +70,14 @@ export function ResultModal({
     // Function to get score color
     const getScoreColor = (score?: number) => {
         if (!score) return 'bg-gray-500';
-        if (score >= 90) return 'bg-green-500';
+        if (score >= 90) return 'bg-[var(--color-theme)]';
         if (score >= 70) return 'bg-amber-500';
         return 'bg-red-500';
     };
 
     const getScoreTextColor = (score?: number) => {
         if (!score) return 'text-gray-500';
-        if (score >= 90) return 'text-green-500';
+        if (score >= 90) return 'text-[var(--color-theme)]';
         if (score >= 70) return 'text-amber-500';
         return 'text-red-500';
     };
@@ -91,9 +91,9 @@ export function ResultModal({
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-                <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-gray-50 to-gray-100">
+                <div className="flex items-center justify-between p-4 border-b bg-[var(--color-theme)]/5">
                     <div className="flex items-center gap-3">
-                        <div className="bg-primary text-primary-foreground p-2 rounded-lg">
+                        <div className="bg-[var(--color-theme)] text-white p-2 rounded-lg">
                             <FileText className="h-5 w-5" />
                         </div>
                         <div>
@@ -139,7 +139,7 @@ export function ResultModal({
                             <TabsList className="w-full justify-start h-12 bg-transparent px-4">
                                 <TabsTrigger
                                     value="content"
-                                    className="data-[state=active]:bg-primary/10 gap-2"
+                                    className="data-[state=active]:bg-[var(--color-theme)]/10 gap-2"
                                 >
                                     <FileText className="h-4 w-4" />
                                     Content
@@ -147,7 +147,7 @@ export function ResultModal({
                                 {hasSeoData && (
                                     <TabsTrigger
                                         value="seo"
-                                        className="data-[state=active]:bg-primary/10 gap-2"
+                                        className="data-[state=active]:bg-[var(--color-theme)]/10 gap-2"
                                     >
                                         <BarChart2 className="h-4 w-4" />
                                         SEO Analysis
@@ -162,11 +162,11 @@ export function ResultModal({
                                 className="mt-0 space-y-4"
                             >
                                 {result.generatedContent ? (
-                                    <div className="prose prose-sm max-w-none dark:prose-invert whitespace-pre-wrap p-4 bg-gray-50 rounded-xl border border-gray-100">
+                                    <div className="prose prose-sm max-w-none dark:prose-invert whitespace-pre-wrap p-4 bg-[var(--color-theme)]/5 rounded-xl border border-[var(--color-theme)]/10">
                                         {result.generatedContent}
                                     </div>
                                 ) : (
-                                    <div className="flex items-center justify-center p-8 bg-gray-50 rounded-xl border border-gray-100">
+                                    <div className="flex items-center justify-center p-8 bg-[var(--color-theme)]/5 rounded-xl border border-[var(--color-theme)]/10">
                                         <div className="text-center text-gray-500">
                                             <AlertCircle className="h-12 w-12 mx-auto mb-2 text-gray-400" />
                                             <p>
@@ -185,7 +185,7 @@ export function ResultModal({
                                 >
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                         {result.seoScore !== undefined && (
-                                            <div className="bg-gradient-to-br from-primary/5 to-primary/10 p-4 rounded-xl border border-primary/20">
+                                            <div className="bg-[var(--color-theme)]/5 p-4 rounded-xl border border-[var(--color-theme)]/10">
                                                 <div className="text-xs text-muted-foreground">
                                                     SEO Score
                                                 </div>
@@ -199,22 +199,22 @@ export function ResultModal({
                                             </div>
                                         )}
                                         {result.wordCount !== undefined && (
-                                            <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 p-4 rounded-xl border border-blue-200/30">
+                                            <div className="bg-[var(--color-theme)]/5 p-4 rounded-xl border border-[var(--color-theme)]/10">
                                                 <div className="text-xs text-muted-foreground">
                                                     Word Count
                                                 </div>
-                                                <div className="text-2xl font-bold text-blue-600">
+                                                <div className="text-2xl font-bold text-[var(--color-theme2)]">
                                                     {result.wordCount}
                                                 </div>
                                             </div>
                                         )}
                                         {result.keywordDensity !==
                                             undefined && (
-                                            <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 p-4 rounded-xl border border-amber-200/30">
+                                            <div className="bg-[var(--color-theme)]/5 p-4 rounded-xl border border-[var(--color-theme)]/10">
                                                 <div className="text-xs text-muted-foreground">
                                                     Keyword Density
                                                 </div>
-                                                <div className="text-2xl font-bold text-amber-600">
+                                                <div className="text-2xl font-bold text-[var(--color-theme2)]">
                                                     {result.keywordDensity.toFixed(
                                                         2
                                                     )}
@@ -223,11 +223,11 @@ export function ResultModal({
                                             </div>
                                         )}
                                         {result.readability !== undefined && (
-                                            <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 p-4 rounded-xl border border-purple-200/30">
+                                            <div className="bg-[var(--color-theme)]/5 p-4 rounded-xl border border-[var(--color-theme)]/10">
                                                 <div className="text-xs text-muted-foreground">
                                                     Readability
                                                 </div>
-                                                <div className="text-2xl font-bold text-purple-600">
+                                                <div className="text-2xl font-bold text-[var(--color-theme2)]">
                                                     {result.readability >= 70
                                                         ? 'Easy'
                                                         : result.readability >=
@@ -241,7 +241,7 @@ export function ResultModal({
 
                                     {result.topKeywords &&
                                         result.topKeywords.length > 0 && (
-                                            <div className="bg-gradient-to-br from-gray-50 to-gray-100/50 p-4 rounded-xl border border-gray-200/30">
+                                            <div className="bg-[var(--color-theme)]/5 p-4 rounded-xl border border-[var(--color-theme)]/10">
                                                 <div className="text-sm font-medium mb-3">
                                                     Top Keywords
                                                 </div>
@@ -251,7 +251,7 @@ export function ResultModal({
                                                             <Badge
                                                                 key={index}
                                                                 variant="outline"
-                                                                className="bg-white border-gray-200 px-3 py-1.5 text-sm"
+                                                                className="bg-white border-[var(--color-theme)]/20 px-3 py-1.5 text-sm"
                                                             >
                                                                 {
                                                                     keyword.keyword
@@ -270,7 +270,7 @@ export function ResultModal({
                     </Tabs>
                 </div>
 
-                <div className="border-t p-4 flex flex-wrap items-center justify-between gap-4 bg-gradient-to-r from-gray-50 to-gray-100">
+                <div className="border-t p-4 flex flex-wrap items-center justify-between gap-4 bg-[var(--color-theme)]/5">
                     <div className="flex items-center gap-2">
                         {result.generatedContent && (
                             <>
@@ -281,7 +281,7 @@ export function ResultModal({
                                     className="gap-1 bg-white hover:bg-gray-50"
                                 >
                                     {copied ? (
-                                        <CheckCircle className="h-4 w-4 text-green-500" />
+                                        <CheckCircle className="h-4 w-4 text-[var(--color-theme)]" />
                                     ) : (
                                         <Copy className="h-4 w-4" />
                                     )}
@@ -305,7 +305,7 @@ export function ResultModal({
                             variant="destructive"
                             size="sm"
                             onClick={onReject}
-                            className="gap-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700"
+                            className="gap-1 bg-red-500 hover:bg-red-600"
                         >
                             <ThumbsDown className="h-4 w-4" />
                             Reject
@@ -314,7 +314,7 @@ export function ResultModal({
                             variant="default"
                             size="sm"
                             onClick={onAccept}
-                            className="gap-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white"
+                            className="gap-1 bg-[var(--color-theme)] hover:bg-[var(--color-theme)]/90 text-white"
                         >
                             <ThumbsUp className="h-4 w-4" />
                             Accept

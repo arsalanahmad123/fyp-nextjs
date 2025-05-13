@@ -50,7 +50,7 @@ export const AuthButtons = () => {
                             <Image
                                 src={session.user.image || '/placeholder.svg'}
                                 alt={session.user.name || 'User'}
-                                className="h-8 w-8 rounded-full"
+                                className="h-20 w-20 rounded-full"
                             />
                         ) : (
                             <User className="h-5 w-5" />

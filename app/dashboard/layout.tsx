@@ -1,24 +1,19 @@
-import { auth } from "@/auth"
-import { redirect } from "next/navigation";
+import type React from 'react';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import { ResponsiveSidebarLayout } from '@/components/dashboard/responsive-sidebar';
+
 interface Props {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
-import { DashboardSidebar } from '@/components/dashboard/dashboard-sidebar';
 
-
-export default async function DashboardLayout({children}: Props){
-
-
+export default async function DashboardLayout({ children }: Props) {
+    // Keep authentication as server-side logic
     const session = await auth();
 
-    if(!session?.user) return redirect('/');
+    if (!session?.user) {
+        return redirect('/');
+    }
 
-    return (
-        <div className="flex h-screen bg-[var(--color-theme3)]">
-            <DashboardSidebar />
-            <main className="flex-1 overflow-y-auto bg-background">
-                {children}
-            </main>
-        </div>
-    );
+    return <ResponsiveSidebarLayout>{children}</ResponsiveSidebarLayout>;
 }

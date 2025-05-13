@@ -7,6 +7,7 @@ interface ContentFormData {
     topic: string;
     contentType: 'linkedin-post' | 'blog-post' | 'product-description';
     keywords: string;
+    platform?: string;
     tone_of_voice: string;
     target_audience: string;
 }

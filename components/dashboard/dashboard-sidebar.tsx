@@ -53,26 +53,29 @@ export function DashboardSidebar() {
     ];
 
     return (
-        <div className="w-64 h-screen flex flex-col bg-[var(--sidebar)] text-[var(--sidebar-foreground)] shadow-md">
+        <div className="w-64 h-full flex flex-col bg-[var(--sidebar)] text-[var(--sidebar-foreground)] shadow-md">
             {/* Sidebar Header */}
             <div className="p-4 border-b border-[var(--sidebar-border)]">
                 <div className="flex items-center space-x-2">
-                    <Link href="/" className="text-xl font-bold font-dm-sans">
+                    <div className="rounded-md bg-[var(--color-theme)] p-1">
+                        <FileText className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-xl font-bold font-dm-sans">
                         Descripto 
-                    </Link>
+                    </span>
                 </div>
             </div>
 
             {/* Menu Items */}
-            <div className="flex-1 py-4">
-                <ul className="space-y-1">
+            <div className="flex-1 py-4 overflow-y-auto">
+                <ul className="space-y-1 px-2">
                     {menuItems.map((item) => {
                         const isActive = pathname === item.href;
                         return (
                             <li key={item.href}>
                                 <Link
                                     href={item.href}
-                                    className={`flex items-center px-4 py-3 text-sm transition-colors duration-200 ${
+                                    className={`flex items-center px-3 py-2.5 text-sm rounded-md transition-colors duration-200 ${
                                         isActive
                                             ? 'bg-[var(--sidebar-primary)] text-[var(--sidebar-primary-foreground)] border-l-4 border-[var(--color-theme)]'
                                             : 'text-[var(--sidebar-foreground)] hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-foreground)]'
@@ -97,11 +100,11 @@ export function DashboardSidebar() {
 
             {/* Footer */}
             <div className="p-4 border-t border-[var(--sidebar-border)]">
-                <ul className="space-y-1">
+                <ul className="space-y-1 px-2">
                     <li>
                         <Link
                             href="/dashboard/profile"
-                            className="flex items-center px-4 py-3 text-sm text-[var(--sidebar-foreground)] hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-foreground)] transition-colors duration-200"
+                            className="flex items-center px-3 py-2.5 text-sm rounded-md text-[var(--sidebar-foreground)] hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-foreground)] transition-colors duration-200"
                         >
                             <User className="h-5 w-5 mr-3 text-[var(--color-theme)]" />
                             <span className="font-dm-sans">Profile</span>
@@ -109,11 +112,12 @@ export function DashboardSidebar() {
                     </li>
                     <li>
                         <Button
-                            className="w-full text-black flex items-center justify-start px-4 py-3 text-sm hover:text-white bg-transparent hover:bg-red-500 transition-colors duration-200 ease-inv0 cursor-pointer text-left rounded-none group"
                             onClick={handleSignOut}
+                            variant={'destructive'}
+                            className="flex items-center px-3 py-2.5"
                         >
-                            <LogOut className="h-5 w-5 mr-3 ml-2 text-theme group-hover:text-white" />
-                            <span className="font-dm-sans font-semibold">Logout</span>
+                            <LogOut className="h-5 w-5 mr-3" />
+                            <span className="font-dm-sans">Logout</span>
                         </Button>
                     </li>
                 </ul>

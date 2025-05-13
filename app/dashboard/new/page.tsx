@@ -25,7 +25,7 @@ export default function NewContentPage() {
         contentType: 'blog-post',
         keywords: [],
         toneOfVoice: 'professional',
-        targetAudience: 'general',
+        targetAudience: '',
         wordLimit: 800,
         contentGoal: 'inform',
     });
@@ -56,14 +56,22 @@ export default function NewContentPage() {
             return;
         }
 
+        if (!formData.targetAudience) {
+            toast('Target audience is required');
+            return;
+        }
+
         setLoading(true);
         try {
             // Convert formData to the format expected by the server action
             const adaptedFormData = {
                 topic: formData.topic,
                 contentType: formData.contentType,
-                keywords: formData.keywords.join(', '), // Convert array to comma-separated string
-                platform: 'website', // Default to website since we removed the selector
+                // Only include keywords if not LinkedIn post
+                keywords:
+                    formData.contentType === 'linkedin-post'
+                        ? ''
+                        : formData.keywords.join(', '),
                 tone_of_voice: formData.toneOfVoice,
                 target_audience: formData.targetAudience,
             };
@@ -103,23 +111,27 @@ export default function NewContentPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-            <div className="w-full max-w-6xl mx-auto px-4 py-8">
-                <div className="mb-8 text-center">
-                    <h1 className="text-3xl font-bold tracking-tight mb-2 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+        <div className="h-screen pt-10 ">
+            <div className="w-full mx-auto pb-20">
+                <div className="mb-6 sm:mb-8 text-center">
+                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-[var(--color-theme)]">
                         Create SEO-Optimized Content
                     </h1>
-                    <p className="text-muted-foreground max-w-2xl mx-auto">
+                    <p className="text-muted-foreground max-w-2xl mx-auto px-4">
                         Generate high-quality, SEO-friendly content tailored to
                         your specific needs
                     </p>
                 </div>
 
-                <ContentForm formData={formData} handleChange={handleChange} />
+                <ContentForm
+                    formData={formData}
+                    handleChange={handleChange}
+                    isSubmitting={loading}
+                />
 
-                <div className="mt-8 flex justify-center">
+                <div className="mt-6 sm:mt-8 flex justify-center px-4">
                     <Button
-                        className="px-8 py-6 text-lg font-medium bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg rounded-xl"
+                        className="w-full sm:w-auto px-4 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium bg-[var(--color-theme)] hover:bg-[var(--color-theme)]/90 shadow-lg rounded-xl"
                         onClick={handleGenerate}
                         disabled={loading}
                     >
@@ -131,19 +143,26 @@ export default function NewContentPage() {
                         ) : (
                             <>
                                 <Sparkles className="mr-2 h-5 w-5" />
-                                Generate SEO Content
+                                Generate{' '}
+                                {formData.contentType === 'linkedin-post'
+                                    ? 'LinkedIn Post'
+                                    : 'SEO Content'}
                             </>
                         )}
                     </Button>
                 </div>
 
                 {loading && (
-                    <div className="mt-8 p-6 border rounded-xl bg-white text-center max-w-md mx-auto shadow-lg">
-                        <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-                        <p className="mt-4 text-lg font-medium">
-                            Creating SEO-optimized content...
+                    <div className="mt-6 sm:mt-8 p-4 sm:p-6 border border-[var(--color-theme)]/20 rounded-xl bg-white text-center max-w-md mx-auto shadow-lg">
+                        <div className="inline-block h-10 sm:h-12 w-10 sm:w-12 animate-spin rounded-full border-4 border-[var(--color-theme)] border-t-transparent"></div>
+                        <p className="mt-4 text-base sm:text-lg font-medium">
+                            Creating{' '}
+                            {formData.contentType === 'linkedin-post'
+                                ? 'LinkedIn post'
+                                : 'SEO-optimized content'}
+                            ...
                         </p>
-                        <p className="text-muted-foreground">
+                        <p className="text-sm text-muted-foreground">
                             This may take a minute or two
                         </p>
                     </div>
