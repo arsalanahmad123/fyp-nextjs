@@ -18,6 +18,7 @@ import {
 import { toast } from 'sonner';
 
 interface ResultModalProps {
+    loading: boolean;
     result: {
         generatedContent?: string;
         seoScore?: number;
@@ -36,6 +37,7 @@ export function ResultModal({
     onClose,
     onAccept,
     onReject,
+    loading,
 }: ResultModalProps) {
     const [activeTab, setActiveTab] = useState('content');
     const [copied, setCopied] = useState(false);
@@ -91,7 +93,7 @@ export function ResultModal({
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-                <div className="flex items-center justify-between p-4 border-b bg-[var(--color-theme)]/5">
+                <div className="flex items-center justify-between p-4 border-b ">
                     <div className="flex items-center gap-3">
                         <div className="bg-[var(--color-theme)] text-white p-2 rounded-lg">
                             <FileText className="h-5 w-5" />
@@ -122,6 +124,7 @@ export function ResultModal({
                         variant="ghost"
                         size="icon"
                         onClick={onClose}
+                        disabled={loading}
                         className="rounded-full hover:bg-gray-200"
                     >
                         <X className="h-5 w-5" />
@@ -278,6 +281,7 @@ export function ResultModal({
                                     variant="outline"
                                     size="sm"
                                     onClick={handleCopy}
+                                    disabled={loading}
                                     className="gap-1 bg-white hover:bg-gray-50"
                                 >
                                     {copied ? (
@@ -291,6 +295,7 @@ export function ResultModal({
                                     variant="outline"
                                     size="sm"
                                     onClick={handleDownload}
+                                    disabled={loading}
                                     className="gap-1 bg-white hover:bg-gray-50"
                                 >
                                     <Download className="h-4 w-4" />
@@ -305,6 +310,7 @@ export function ResultModal({
                             variant="destructive"
                             size="sm"
                             onClick={onReject}
+                            disabled={loading}
                             className="gap-1 bg-red-500 hover:bg-red-600"
                         >
                             <ThumbsDown className="h-4 w-4" />
@@ -314,10 +320,17 @@ export function ResultModal({
                             variant="default"
                             size="sm"
                             onClick={onAccept}
+                            disabled={loading}
                             className="gap-1 bg-[var(--color-theme)] hover:bg-[var(--color-theme)]/90 text-white"
                         >
-                            <ThumbsUp className="h-4 w-4" />
-                            Accept
+                            {loading ? (
+                                <span>Accepting ...</span>
+                            ) : (
+                                <>
+                                    <ThumbsUp className="h-4 w-4" />
+                                    Accept
+                                </>
+                            )}
                         </Button>
                     </div>
                 </div>

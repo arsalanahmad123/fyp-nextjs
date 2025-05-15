@@ -7,6 +7,7 @@ import { generateContent } from '../../../actions/generate-content';
 import { toast } from 'sonner';
 import { Sparkles, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { createContent } from '@/actions/create-content';
 
 // Define the form data structure
 interface ContentFormData {
@@ -20,6 +21,10 @@ interface ContentFormData {
 }
 
 export default function NewContentPage() {
+
+
+
+
     const [formData, setFormData] = useState<ContentFormData>({
         topic: '',
         contentType: 'blog-post',
@@ -99,15 +104,52 @@ export default function NewContentPage() {
     };
 
     // Handle accepting the generated content
-    const handleAccept = () => {
-        toast('Content accepted');
+    const handleAccept = async () => {
+        setLoading(true)
+         if (!result?.generatedContent) {
+             toast('Generated content is missing');
+             setLoading(false);
+             return;
+         }
+        const {
+            topic,
+            contentType,
+            keywords,
+            toneOfVoice,
+            targetAudience,
+            contentGoal,
+        } = formData;
+
+        const dataToSend = {
+            inputMetadata: {
+                topic,
+                contentType,
+                keywords,
+                tone_of_voice: toneOfVoice,
+                target_audience: targetAudience,
+                contentGoal,
+            },
+            generatedContent: result?.generatedContent,
+            seoScore: result?.seoScore,
+            keywordDensity: result?.keywordDensity,
+            wordCount: result?.wordCount,
+            readability: result?.readability,
+            topKeywords: result?.topKeywords,
+        };
+
+        const response = await createContent(dataToSend);
+        if(response.success) toast('Content accepted');
         setResult(null);
+        setLoading(false)
     };
+
 
     // Handle rejecting the generated content
     const handleReject = () => {
+        setLoading(true)
         toast('Content rejected');
         setResult(null);
+        setLoading(false);
     };
 
     return (
@@ -152,26 +194,13 @@ export default function NewContentPage() {
                     </Button>
                 </div>
 
-                {loading && (
-                    <div className="mt-6 sm:mt-8 p-4 sm:p-6 border border-[var(--color-theme)]/20 rounded-xl bg-white text-center max-w-md mx-auto shadow-lg">
-                        <div className="inline-block h-10 sm:h-12 w-10 sm:w-12 animate-spin rounded-full border-4 border-[var(--color-theme)] border-t-transparent"></div>
-                        <p className="mt-4 text-base sm:text-lg font-medium">
-                            Creating{' '}
-                            {formData.contentType === 'linkedin-post'
-                                ? 'LinkedIn post'
-                                : 'SEO-optimized content'}
-                            ...
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                            This may take a minute or two
-                        </p>
-                    </div>
-                )}
+                
             </div>
 
             {/* Result Modal */}
             {result && (
-                <ResultModal
+                <ResultModal 
+                    loading={loading}
                     result={result}
                     onClose={() => setResult(null)}
                     onAccept={handleAccept}

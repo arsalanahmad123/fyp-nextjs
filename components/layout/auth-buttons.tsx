@@ -43,17 +43,18 @@ export const AuthButtons = () => {
                 <DropdownMenuTrigger asChild>
                     <Button
                         variant="ghost"
-                        className="relative h-10 w-10 rounded-full flex items-center justify-center hover:bg-accent"
+                        className="relative h-10 w-10 rounded-full overflow-hidden p-0"
                         aria-label="Profile menu"
                     >
                         {session?.user?.image ? (
                             <Image
                                 src={session.user.image || '/placeholder.svg'}
                                 alt={session.user.name || 'User'}
-                                className="h-20 w-20 rounded-full"
+                                fill
+                                className="object-cover"
                             />
                         ) : (
-                            <User className="h-5 w-5" />
+                            <User className="h-5 w-5 text-muted-foreground" />
                         )}
                     </Button>
                 </DropdownMenuTrigger>

@@ -10,6 +10,7 @@ interface ContentFormData {
     platform?: string;
     tone_of_voice: string;
     target_audience: string;
+    contentGoal?: string 
 }
 
 interface ContentGenerationResult {
@@ -42,7 +43,7 @@ function getContentLength(contentType: string): {
 
 // === SYSTEM PROMPT ===
 function createSystemPrompt(data: ContentFormData): string {
-    const { contentType, tone_of_voice, keywords, target_audience } = data;
+    const { contentType, tone_of_voice, keywords, target_audience,contentGoal } = data;
 
     const keywordList = keywords
         .split(',')
@@ -81,18 +82,36 @@ Instructions:
 
         case 'product-description':
             styleInstructions = `
-Write a product description in a ${tone_of_voice} tone for ${target_audience}.
+Act like an expert product copywriter who writes natural, emotional, and high-converting product descriptions that feel human and relatable — not robotic or salesy.
 
-Instructions:
-- Use 300-400 words.
-- Clearly highlight features and benefits.
-- Include a CTA.
-- Use these keywords: ${keywordList}
-            `.trim();
+You are writing for {target_audience}, and your goal is to {contentGoal}. Use a {tone_of_voice} tone.
+
+Integrate these keywords smoothly and naturally throughout the description (without stuffing): {keywords}.
+
+The product description should follow these strategies — without using headings or making it feel like a list:
+
+    Turn key features into clear, simple benefits the customer will care about.
+
+    Address pain points or frustrations your buyer might have.
+
+    Gently educate the customer about any unique, technical, or health-related details using simple, easy-to-understand language.
+
+    Include a short real-life scenario or story that helps the reader imagine using the product in daily life.
+
+❗ Important style rules:
+
+    Use clear, casual, simple English. Avoid fancy phrases or robotic structure.
+
+    Do not use any headings like “Features” or “Story”.
+
+    Keep the total word count under 400 words.
+
+    Make it feel like a natural paragraph, not a bulleted list or article.
+    `.trim();
             break;
 
         default:
-            styleInstructions = `Write in a helpful, SEO-optimized tone using simple language.`;
+            styleInstructions = `Write in a friendly, helpful tone using simple and clear language. Keep it easy to understand for everyone. The goal of this content is to **${contentGoal}** the reader.`;
     }
 
     return `
