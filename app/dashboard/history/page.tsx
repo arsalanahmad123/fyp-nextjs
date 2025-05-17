@@ -228,8 +228,8 @@ export default async function HistoryPage() {
             </div>
 
             <Tabs defaultValue="all" className="space-y-4">
-                <TabsList className="w-full md:w-fit overflow-x-auto py-1">
-                    <div className="flex space-x-2 p-2">
+                <TabsList className="w-full md:w-fit overflow-x-auto overflow-y-hidden py-1">
+                    <div className="flex space-x-2">
                         <TabsTrigger value="all">All</TabsTrigger>
                         <TabsTrigger value="blog-post">Blog</TabsTrigger>
                         <TabsTrigger value="linkedin-post">

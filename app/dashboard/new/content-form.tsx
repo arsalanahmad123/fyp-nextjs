@@ -154,7 +154,7 @@ export function ContentForm({
                                         : ''
                                 }`}
                             >
-                                <div className="flex items-center gap-3">
+                                <div className="flex flex-col items-center gap-3">
                                     <div
                                         className={`p-2 rounded-lg ${
                                             formData.contentType === 'blog-post'
@@ -217,7 +217,7 @@ export function ContentForm({
                                         : ''
                                 }`}
                             >
-                                <div className="flex items-center gap-3">
+                                <div className="flex flex-col  items-center gap-3">
                                     <div
                                         className={`p-2 rounded-lg ${
                                             formData.contentType ===
@@ -278,7 +278,7 @@ export function ContentForm({
                                         : ''
                                 }`}
                             >
-                                <div className="flex items-center gap-3">
+                                <div className="flex flex-col items-center gap-3">
                                     <div
                                         className={`p-2 rounded-lg ${
                                             formData.contentType ===
@@ -520,7 +520,7 @@ export function ContentForm({
                                 Tone of Voice
                             </h3>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-auto gap-1">
                             {toneOptions.map((tone) => (
                                 <button
                                     key={tone.value}

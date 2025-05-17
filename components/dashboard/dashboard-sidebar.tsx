@@ -56,14 +56,11 @@ export function DashboardSidebar() {
         <div className="w-64 h-full flex flex-col bg-[var(--sidebar)] text-[var(--sidebar-foreground)] shadow-md">
             {/* Sidebar Header */}
             <div className="p-4 border-b border-[var(--sidebar-border)]">
-                <div className="flex items-center space-x-2">
-                    <div className="rounded-md bg-[var(--color-theme)] p-1">
-                        <FileText className="h-6 w-6 text-white" />
-                    </div>
+                <Link href={'/'}>
                     <span className="text-xl font-bold font-dm-sans">
                         Descripto 
                     </span>
-                </div>
+                </Link>
             </div>
 
             {/* Menu Items */}

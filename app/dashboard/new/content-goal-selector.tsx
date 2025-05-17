@@ -27,14 +27,14 @@ export function ContentGoalSelector({
     ];
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-auto gap-2 sm:gap-3">
             {goals.map((goal) => (
                 <Button
                     key={goal.value}
                     variant={selected === goal.value ? 'default' : 'outline'}
                     onClick={() => onSelect(goal.value)}
                     disabled={disabled}
-                    className={`flex items-center justify-start gap-3 h-12 px-4 ${
+                    className={`flex items-center justify-start gap-1 h-12 px-4 ${
                         selected === goal.value
                             ? 'bg-[var(--color-theme)] hover:bg-[var(--color-theme)]/90'
                             : ''

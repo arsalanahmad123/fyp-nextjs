@@ -171,7 +171,7 @@ export default function NewContentPage() {
                     isSubmitting={loading}
                 />
 
-                <div className="mt-6 sm:mt-8 flex justify-center px-4">
+                <div className="mt-6 sm:mt-8 w-full px-4">
                     <Button
                         className="w-full sm:w-auto px-4 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium bg-[var(--color-theme)] hover:bg-[var(--color-theme)]/90 shadow-lg rounded-xl"
                         onClick={handleGenerate}
