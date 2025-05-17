@@ -12,7 +12,9 @@ export default function Footer() {
     if (
         pathname === '/signin' ||
         pathname.startsWith('/signup') ||
-        pathname.startsWith('/dashboard')
+        pathname.startsWith('/dashboard') ||
+        pathname.startsWith('/forgot') ||
+        pathname.startsWith('/reset')
     )
         return null;
 

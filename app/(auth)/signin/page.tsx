@@ -139,14 +139,14 @@ const Signin = () => {
                                 )}
                             />
 
-                            {/* <div className="text-sm text-right">
+                            <div className="text-sm text-right">
                                 <Link
                                     href="/forgot-password"
                                     className="text-sm text-gray-800 hover:text-gray-900 hover:underline"
                                 >
                                     Forgot Password?
                                 </Link>
-                            </div> */}
+                            </div>
 
                             <Button
                                 className="w-full bg-black hover:bg-theme text-white py-6 text-[17px] cursor-pointer transition-colors duration-200 ease-in"
@@ -168,6 +168,7 @@ const Signin = () => {
                             </Button>
                         </form>
                     </Form>
+
 
                     <div className="text-center mt-6">
                         <p className="text-sm text-gray-800 font-semibold">

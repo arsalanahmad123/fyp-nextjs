@@ -14,6 +14,8 @@ export const Header = () => {
             pathname === '/signin' ||
             pathname.startsWith('/signup') ||
             pathname.startsWith('/dashboard')
+            || pathname.startsWith('/forgot') || 
+            pathname.startsWith('/reset')
         ) {
             return null;
         }

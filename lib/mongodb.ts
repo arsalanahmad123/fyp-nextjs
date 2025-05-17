@@ -5,7 +5,7 @@ declare global {
     var mongoose: any;
 }
 
-const MONGODB_URI = 'mongodb://127.0.0.1:27017/seo_content_db';
+const MONGODB_URI = process.env.MONGO_URI;
 
 if (!MONGODB_URI) {
     throw new Error('⚠️ Please define the MONGODB_URI');
