@@ -99,7 +99,7 @@ export function DashboardSidebar() {
                     <li>
                         <Link
                             href="/dashboard/profile"
-                            className="flex items-center px-3 py-2.5 text-sm rounded-md text-[var(--sidebar-foreground)] hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-foreground)] transition-colors duration-200"
+                            className="flex items-center px-3 py-2.5 text-sm rounded-md text-[var(--sidebar-foreground)] hover:bg-[var(--sidebar-accent)] hover:text-[var(--sidebar-accent-foreground)] transition-colors duration-200 cursor-pointer"
                         >
                             <User className="h-5 w-5 mr-3 text-[var(--color-theme)]" />
                             <span className="font-dm-sans">Profile</span>
@@ -109,7 +109,7 @@ export function DashboardSidebar() {
                         <Button
                             onClick={handleSignOut}
                             variant={'destructive'}
-                            className="flex items-center px-3 py-2.5"
+                            className="flex items-center px-3 py-2.5 cursor-pointer"
                         >
                             <LogOut className="h-5 w-5 mr-3" />
                             <span className="font-dm-sans">Logout</span>

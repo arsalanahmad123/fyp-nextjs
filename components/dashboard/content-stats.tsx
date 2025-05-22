@@ -10,17 +10,16 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 
-const data = [
-    { name: 'Jan', content: 4, score: 78 },
-    { name: 'Feb', content: 7, score: 80 },
-    { name: 'Mar', content: 10, score: 82 },
-    { name: 'Apr', content: 15, score: 83 },
-    { name: 'May', content: 18, score: 85 },
-    { name: 'Jun', content: 20, score: 86 },
-    { name: 'Jul', content: 24, score: 87 },
-];
 
-export function ContentStats() {
+interface ContentStatsProps {
+    data: {
+        name: string;
+        content: number;
+        score: number;
+    }[];
+}
+
+export function ContentStats({data}: ContentStatsProps) {
     return (
         <ResponsiveContainer width="100%" height={350}>
             <LineChart

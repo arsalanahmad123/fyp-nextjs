@@ -8,10 +8,13 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RecentGenerations } from '@/components/dashboard/recent-generations';
 import { ContentStats } from '@/components/dashboard/content-stats';
+import { getDashboardStats } from '@/actions/dashboard-stats';
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+    const stats = await getDashboardStats();
+
     return (
-        <div className="flex flex-col gap-6 p-6 max-w-10/12 mx-auto">
+        <div className="flex flex-col gap-6 p-6 w-full mx-auto">
             <div className="flex flex-col gap-2">
                 <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
                 <p className="text-muted-foreground">
@@ -25,6 +28,7 @@ export default function DashboardPage() {
                     <TabsTrigger value="analytics">Analytics</TabsTrigger>
                     <TabsTrigger value="reports">Reports</TabsTrigger>
                 </TabsList>
+
                 <TabsContent value="overview" className="space-y-4">
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                         <Card>
@@ -34,12 +38,12 @@ export default function DashboardPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">142</div>
-                                <p className="text-xs text-muted-foreground">
-                                    +20% from last month
-                                </p>
+                                <div className="text-2xl font-bold">
+                                    {stats?.totalContent ?? 0}
+                                </div>
                             </CardContent>
                         </Card>
+
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
@@ -47,12 +51,12 @@ export default function DashboardPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">24</div>
-                                <p className="text-xs text-muted-foreground">
-                                    +12% from last month
-                                </p>
+                                <div className="text-2xl font-bold">
+                                    {stats?.contentThisMonth ?? 0}
+                                </div>
                             </CardContent>
                         </Card>
+
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
@@ -60,23 +64,22 @@ export default function DashboardPage() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">1,245</div>
-                                <p className="text-xs text-muted-foreground">
-                                    +5% from last month
-                                </p>
+                                <div className="text-2xl font-bold">
+                                    {stats?.avgWordCount ?? 0}
+                                </div>
                             </CardContent>
                         </Card>
+
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
-                                    SEO Score
+                                    Average SEO Score
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">87%</div>
-                                <p className="text-xs text-muted-foreground">
-                                    +2% from last month
-                                </p>
+                                <div className="text-2xl font-bold">
+                                    {stats?.avgSeoScore ?? 0}%
+                                </div>
                             </CardContent>
                         </Card>
                     </div>
@@ -87,7 +90,7 @@ export default function DashboardPage() {
                                 <CardTitle>Content Performance</CardTitle>
                             </CardHeader>
                             <CardContent className="pl-2">
-                                <ContentStats />
+                                <ContentStats data={stats?.monthlyPerformance ?? []} />
                             </CardContent>
                         </Card>
                         <Card className="col-span-3">
@@ -98,11 +101,15 @@ export default function DashboardPage() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <RecentGenerations />
+                                <RecentGenerations
+                                    data={stats?.recentContent ?? []}
+                                />
                             </CardContent>
                         </Card>
                     </div>
                 </TabsContent>
+
+                {/* Placeholder tabs unchanged */}
                 <TabsContent value="analytics" className="space-y-4">
                     <Card>
                         <CardHeader>
@@ -120,6 +127,7 @@ export default function DashboardPage() {
                         </CardContent>
                     </Card>
                 </TabsContent>
+
                 <TabsContent value="reports" className="space-y-4">
                     <Card>
                         <CardHeader>
