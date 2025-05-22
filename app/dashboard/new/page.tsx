@@ -8,12 +8,14 @@ import { toast } from 'sonner';
 import { Sparkles, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { createContent } from '@/actions/create-content';
+import { ProgressBar } from '@/components/content/ProgressBar';
+
 
 // Define the form data structure
 interface ContentFormData {
     topic: string;
     contentType: 'blog-post' | 'product-description' | 'linkedin-post';
-    keywords: string[];
+    keywords?: string[];
     toneOfVoice: string;
     targetAudience: string;
     wordLimit: number | null;
@@ -21,10 +23,6 @@ interface ContentFormData {
 }
 
 export default function NewContentPage() {
-
-
-
-
     const [formData, setFormData] = useState<ContentFormData>({
         topic: '',
         contentType: 'blog-post',
@@ -36,6 +34,8 @@ export default function NewContentPage() {
     });
 
     const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [status, setStatus] = useState('Starting content generation...');
     const [result, setResult] = useState<{
         generatedContent?: string;
         seoScore?: number;
@@ -67,7 +67,27 @@ export default function NewContentPage() {
         }
 
         setLoading(true);
+        setProgress(0);
+        setStatus('Starting content generation...');
         try {
+            const progressInterval = setInterval(() => {
+                setProgress((prev) => {
+                    if (prev >= 90) {
+                        clearInterval(progressInterval);
+                        setStatus('Finalizing content...');
+                        return prev;
+                    }
+                    const newProgress = prev + 10;
+                    // Update status based on progress milestones:
+                    if (newProgress === 10) setStatus('Fetching data...');
+                    else if (newProgress === 40)
+                        setStatus('Analyzing keywords...');
+                    else if (newProgress === 70)
+                        setStatus('Generating content...');
+                    return newProgress;
+                });
+            }, 300);
+            
             // Convert formData to the format expected by the server action
             const adaptedFormData = {
                 topic: formData.topic,
@@ -76,12 +96,15 @@ export default function NewContentPage() {
                 keywords:
                     formData.contentType === 'linkedin-post'
                         ? ''
-                        : formData.keywords.join(', '),
+                        : formData?.keywords?.join(', '),
                 tone_of_voice: formData.toneOfVoice,
                 target_audience: formData.targetAudience,
             };
 
             const response = await generateContent(adaptedFormData);
+
+            clearInterval(progressInterval);
+            setProgress(100); // mark complete on success
 
             if (response.success) {
                 setResult({
@@ -100,6 +123,7 @@ export default function NewContentPage() {
             toast('Error generating content');
         } finally {
             setLoading(false);
+            setProgress(0);
         }
     };
 
@@ -154,6 +178,7 @@ export default function NewContentPage() {
 
     return (
         <div className="h-screen pt-10 ">
+            <ProgressBar isLoading={loading} progress={progress} status={status} />
             <div className="w-full mx-auto pb-20">
                 <div className="mb-6 sm:mb-8 text-center">
                     <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-[var(--color-theme)]">
@@ -193,13 +218,11 @@ export default function NewContentPage() {
                         )}
                     </Button>
                 </div>
-
-                
             </div>
 
             {/* Result Modal */}
             {result && (
-                <ResultModal 
+                <ResultModal
                     loading={loading}
                     result={result}
                     onClose={() => setResult(null)}

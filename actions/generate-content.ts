@@ -6,11 +6,11 @@ import { openai } from '@/lib/openai';
 interface ContentFormData {
     topic: string;
     contentType: 'linkedin-post' | 'blog-post' | 'product-description';
-    keywords: string;
+    keywords?: string;
     platform?: string;
     tone_of_voice: string;
     target_audience: string;
-    contentGoal?: string 
+    contentGoal?: string;
 }
 
 interface ContentGenerationResult {
@@ -43,13 +43,21 @@ function getContentLength(contentType: string): {
 
 // === SYSTEM PROMPT ===
 function createSystemPrompt(data: ContentFormData): string {
-    const { contentType, tone_of_voice, keywords, target_audience,contentGoal } = data;
+    const {
+        contentType,
+        tone_of_voice,
+        keywords,
+        target_audience,
+        contentGoal,
+    } = data;
 
     const keywordList = keywords
-        .split(',')
-        .map((k) => k.trim())
-        .filter(Boolean)
-        .join(', ');
+        ? keywords
+              .split(',')
+              .map((k) => k.trim())
+              .filter(Boolean)
+              .join(', ')
+        : '[AUTO-GENERATE RELEVANT KEYWORDS]';
 
     let styleInstructions = '';
 
@@ -57,7 +65,6 @@ function createSystemPrompt(data: ContentFormData): string {
         case 'linkedin-post':
             styleInstructions = `
 Write in a ${tone_of_voice} tone for a LinkedIn audience of ${target_audience}.
-
 Instructions:
 - Start with a line which attracts users, like it can be funny, dramatic, or anything.
 - Use short, simple sentences.
@@ -71,7 +78,6 @@ Instructions:
         case 'blog-post':
             styleInstructions = `
 Write a blog post in a ${tone_of_voice} tone for ${target_audience}.
-
 Instructions:
 - Use approx. 1000+ words.
 - Optimize for SEO using these keywords: ${keywordList}
@@ -84,9 +90,9 @@ Instructions:
             styleInstructions = `
 Act like an expert product copywriter who writes natural, emotional, and high-converting product descriptions that feel human and relatable — not robotic or salesy.
 
-You are writing for {target_audience}, and your goal is to {contentGoal}. Use a {tone_of_voice} tone.
+You are writing for ${target_audience}, and your goal is to ${contentGoal}. Use a ${tone_of_voice} tone.
 
-Integrate these keywords smoothly and naturally throughout the description (without stuffing): {keywords}.
+Integrate these keywords smoothly and naturally throughout the description (without stuffing): ${keywordList}.
 
 The product description should follow these strategies — without using headings or making it feel like a list:
 
@@ -99,24 +105,19 @@ The product description should follow these strategies — without using heading
     Include a short real-life scenario or story that helps the reader imagine using the product in daily life.
 
 ❗ Important style rules:
-
     Use clear, casual, simple English. Avoid fancy phrases or robotic structure.
-
     Do not use any headings like “Features” or “Story”.
-
     Keep the total word count under 400 words.
-
     Make it feel like a natural paragraph, not a bulleted list or article.
-    `.trim();
+            `.trim();
             break;
 
         default:
-            styleInstructions = `Write in a friendly, helpful tone using simple and clear language. Keep it easy to understand for everyone. The goal of this content is to **${contentGoal}** the reader.`;
+            styleInstructions = `Write in a friendly, helpful tone using simple and clear language. The goal of this content is to **${contentGoal}** the reader.`;
     }
 
     return `
 You are a highly skilled SEO content writer.
-
 ${styleInstructions}
     `.trim();
 }
@@ -125,22 +126,25 @@ ${styleInstructions}
 function analyzeContent(
     content: string,
     topic: string,
-    keywordsString: string
+    keywordsString?: string
 ) {
     const words = content.split(/\s+/).filter(Boolean);
     const wordCount = words.length;
 
-    const keywords = keywordsString
-        .split(',')
-        .map((k) => k.trim().toLowerCase())
-        .filter(Boolean);
-
-    if (!keywords.includes(topic.toLowerCase()))
-        keywords.unshift(topic.toLowerCase());
-
     const contentLower = content.toLowerCase();
-    const keywordCounts: Record<string, number> = {};
 
+    const keywords = keywordsString
+        ? keywordsString
+              .split(',')
+              .map((k) => k.trim().toLowerCase())
+              .filter(Boolean)
+        : [];
+
+    if (!keywords.includes(topic.toLowerCase())) {
+        keywords.unshift(topic.toLowerCase());
+    }
+
+    const keywordCounts: Record<string, number> = {};
     keywords.forEach((keyword) => {
         const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
         const matches = contentLower.match(regex);
@@ -171,7 +175,7 @@ function analyzeContent(
 function calculateSeoScore(
     content: string,
     topic: string,
-    keywords: string,
+    keywords: string | undefined,
     contentType: string
 ): number {
     const { wordCount, keywordDensity, readability } = analyzeContent(
@@ -220,14 +224,8 @@ export async function generateContent(
         const response = await openai.chat.completions.create({
             model: 'gpt-4o',
             messages: [
-                {
-                    role: 'system',
-                    content: systemPrompt,
-                },
-                {
-                    role: 'user',
-                    content: formData.topic,
-                },
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: formData.topic },
             ],
             max_tokens: Math.min(4000, targetTokens),
             temperature: 0.7,

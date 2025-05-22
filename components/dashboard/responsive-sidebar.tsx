@@ -104,11 +104,11 @@ export function ResponsiveSidebarLayout({
 
             {/* Main content */}
             <main
-                className={`flex-1 overflow-y-auto p-4 transition-all duration-300 ${
+                className={`flex-1 overflow-y-auto lg:p-4 p-2 transition-all duration-300 ${
                     sidebarOpen ? 'lg:ml-0' : 'lg:ml-0'
                 } pt-16 lg:pt-4`}
             >
-                <div className="max-w-10/12 mx-auto">{children}</div>
+                <div className="lg:max-w-10/12 w-full mx-auto">{children}</div>
             </main>
         </div>
     );

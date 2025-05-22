@@ -197,3 +197,107 @@ html,body{
 }
 
 
+
+/* Editor custom styles */
+
+.ProseMirror {
+    @apply p-4;
+  }
+  
+  .ProseMirror:focus {
+    @apply outline-none;
+  }
+  
+  .ProseMirror h1 {
+    @apply text-3xl font-bold mb-4 mt-6;
+  }
+  
+  .ProseMirror h2 {
+    @apply text-2xl font-bold mb-3 mt-5;
+  }
+  
+  .ProseMirror h3 {
+    @apply text-xl font-bold mb-3 mt-4;
+  }
+  
+  .ProseMirror p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  .ProseMirror ul {
+    @apply list-disc pl-5 mb-4;
+  }
+  
+  .ProseMirror ol {
+    @apply list-decimal pl-5 mb-4;
+  }
+  
+  .ProseMirror li {
+    @apply mb-1;
+  }
+  
+  .ProseMirror a {
+    @apply text-blue-600 underline hover:text-blue-800 transition-colors;
+  }
+  
+  .ProseMirror img {
+    @apply max-w-full h-auto rounded-md my-4;
+  }
+  
+  .ProseMirror blockquote {
+    @apply border-l-4 border-gray-200 dark:border-gray-700 pl-4 italic my-4;
+  }
+  
+  .ProseMirror code {
+    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm;
+  }
+  
+  .ProseMirror pre {
+    @apply bg-gray-100 dark:bg-gray-800 p-3 rounded-md overflow-x-auto my-4;
+  }
+  
+  .ProseMirror pre code {
+    @apply bg-transparent p-0;
+  }
+  
+  .ProseMirror table {
+    @apply w-full border-collapse my-4;
+  }
+  
+  .ProseMirror th {
+    @apply bg-gray-100 dark:bg-gray-800 p-2 text-left border border-gray-300 dark:border-gray-700;
+  }
+  
+  .ProseMirror td {
+    @apply p-2 border border-gray-300 dark:border-gray-700;
+  }
+  
+  .ProseMirror hr {
+    @apply my-6 border-t border-gray-300 dark:border-gray-700;
+  }
+  
+  .ProseMirror [data-align='center'] {
+    @apply text-center;
+  }
+  
+  .ProseMirror [data-align='right'] {
+    @apply text-right;
+  }
+  
+  .ProseMirror [data-align='left'] {
+    @apply text-left;
+  }
+  
+  /* Editor transitions */
+  .editor-enter {
+    @apply opacity-0;
+  }
+  .editor-enter-active {
+    @apply opacity-100 transition-opacity duration-300;
+  }
+  .editor-exit {
+    @apply opacity-100;
+  }
+  .editor-exit-active {
+    @apply opacity-0 transition-opacity duration-300;
+  }

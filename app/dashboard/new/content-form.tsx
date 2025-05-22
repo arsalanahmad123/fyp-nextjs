@@ -27,7 +27,7 @@ interface ContentFormProps {
     formData: {
         topic: string;
         contentType: 'blog-post' | 'product-description' | 'linkedin-post';
-        keywords: string[];
+        keywords?: string[];
         toneOfVoice: string;
         targetAudience: string;
         wordLimit: number | null;
@@ -66,8 +66,9 @@ export function ContentForm({
     const handleAddKeyword = () => {
         if (keywordInput.trim()) {
             const newKeyword = keywordInput.trim();
-            if (!formData.keywords.includes(newKeyword)) {
-                handleChange('keywords', [...formData.keywords, newKeyword]);
+            const currentKeywords = formData.keywords ?? [];
+            if (!currentKeywords.includes(newKeyword)) {
+                handleChange('keywords', [...currentKeywords, newKeyword]);
             }
             setKeywordInput('');
         }
@@ -81,9 +82,10 @@ export function ContentForm({
     };
 
     const handleRemoveKeyword = (keyword: string) => {
+        const currentKeywords = formData.keywords ?? [];
         handleChange(
             'keywords',
-            formData.keywords.filter((k) => k !== keyword)
+            currentKeywords.filter((k) => k !== keyword)
         );
     };
 
@@ -201,8 +203,7 @@ export function ContentForm({
                                         'contentType',
                                         'linkedin-post'
                                     );
-                                    // Clear keywords when switching to LinkedIn post
-                                    if (formData.keywords.length > 0) {
+                                    if ((formData.keywords ?? []).length > 0) {
                                         handleChange('keywords', []);
                                     }
                                 }}
@@ -459,9 +460,9 @@ export function ContentForm({
                             </div>
 
                             {/* Keywords Display */}
-                            {formData.keywords.length > 0 ? (
+                            {(formData.keywords ?? []).length > 0 ? (
                                 <div className="flex flex-wrap gap-2 mt-3 p-3 bg-[var(--color-theme)]/5 rounded-lg border border-[var(--color-theme)]/10">
-                                    {formData.keywords.map((keyword, index) => (
+                                    {(formData.keywords ?? []).map((keyword, index) => (
                                         <Badge
                                             key={index}
                                             variant="secondary"

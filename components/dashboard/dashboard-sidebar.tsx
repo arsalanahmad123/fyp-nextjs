@@ -7,8 +7,6 @@ import { Button } from '../ui/button';
 import {
     LayoutDashboard,
     History,
-    Settings,
-    FileText,
     PlusCircle,
     User,
     LogOut,
@@ -40,16 +38,16 @@ export function DashboardSidebar() {
             icon: History,
             href: '/dashboard/history',
         },
-        {
-            title: 'Content Library',
-            icon: FileText,
-            href: '/dashboard/library',
-        },
-        {
-            title: 'Settings',
-            icon: Settings,
-            href: '/dashboard/settings',
-        },
+        // {
+        //     title: 'Content Library',
+        //     icon: FileText,
+        //     href: '/dashboard/library',
+        // },
+        // {
+        //     title: 'Settings',
+        //     icon: Settings,
+        //     href: '/dashboard/settings',
+        // },
     ];
 
     return (

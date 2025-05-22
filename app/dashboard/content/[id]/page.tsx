@@ -1,10 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Edit, Share2 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { getContentById } from '../../../../actions/dashboard-actions';
 import { format } from 'date-fns';
+import ContentEditorWrapper from '@/components/content/ContentEditorWrapper';
+import ShareButton from './share-button';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
     const {id} = await params;
@@ -21,6 +23,8 @@ export default async function ContentDetailPage({
 }) {
     const {id} = await params;
     const content = await getContentById(id);
+
+    const contentToBePassed = JSON.parse(JSON.stringify(content));
 
     if (!content) {
         return (
@@ -40,6 +44,10 @@ export default async function ContentDetailPage({
         );
     }
 
+    const isEditableContentType =
+        content.inputMetadata.contentType === 'blog-post' ||
+        content.inputMetadata.contentType === 'linkedin-post';
+
     return (
         <div className="container mx-auto p-4 sm:p-6 max-w-6xl">
             <div className="flex flex-col gap-6">
@@ -52,14 +60,7 @@ export default async function ContentDetailPage({
                         </Button>
                     </Link>
                     <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                            <Edit className="mr-2 h-4 w-4" />
-                            Edit
-                        </Button>
-                        <Button variant="outline" size="sm">
-                            <Share2 className="mr-2 h-4 w-4" />
-                            Share
-                        </Button>
+                        <ShareButton />
                     </div>
                 </div>
 
@@ -94,15 +95,21 @@ export default async function ContentDetailPage({
                             </CardHeader>
                         </Card>
 
-                        {/* Content display */}
                         <Card className="overflow-hidden">
                             <CardContent className="p-4 sm:p-6">
-                                <div
-                                    className="prose max-w-none"
-                                    dangerouslySetInnerHTML={{
-                                        __html: content.generatedContent,
-                                    }}
-                                />
+                                {isEditableContentType ? (
+                                    <ContentEditorWrapper
+                                        content={contentToBePassed}
+                                        contentId={id}
+                                    />
+                                ) : (
+                                    <div
+                                        className="prose max-w-none"
+                                        dangerouslySetInnerHTML={{
+                                            __html: content.generatedContent,
+                                        }}
+                                    />
+                                )}
                             </CardContent>
                         </Card>
                     </div>
@@ -180,7 +187,11 @@ export default async function ContentDetailPage({
                                         <span className="text-sm font-medium text-muted-foreground">
                                             Readability
                                         </span>
-                                        <span>{content.readability}</span>
+                                        <span>
+                                            {Number(
+                                                content.readability
+                                            ).toFixed(3)}
+                                        </span>
                                     </div>
                                 )}
                             </CardContent>

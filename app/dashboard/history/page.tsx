@@ -1,4 +1,4 @@
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import {
     Card,
     CardContent,
@@ -10,7 +10,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Search, Filter, ArrowUpDown ,Eye} from 'lucide-react';
+import { Search ,Eye} from 'lucide-react';
 import { format } from 'date-fns';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Terminal } from 'lucide-react';
@@ -204,7 +204,7 @@ export default async function HistoryPage() {
                             className="w-full pl-8"
                         />
                     </div>
-                    <div className="flex gap-2">
+                    {/* <div className="flex gap-2">
                         <Button
                             variant="outline"
                             size="sm"
@@ -223,7 +223,7 @@ export default async function HistoryPage() {
                             <ArrowUpDown className="mr-2 h-4 w-4" />
                             <span className="sr-only sm:not-sr-only">Sort</span>
                         </Button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
