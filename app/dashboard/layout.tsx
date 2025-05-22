@@ -2,6 +2,7 @@ import type React from 'react';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { ResponsiveSidebarLayout } from '@/components/dashboard/responsive-sidebar';
+import { SessionProvider } from 'next-auth/react';
 
 interface Props {
     children: React.ReactNode;
@@ -15,5 +16,9 @@ export default async function DashboardLayout({ children }: Props) {
         return redirect('/');
     }
 
-    return <ResponsiveSidebarLayout>{children}</ResponsiveSidebarLayout>;
+    return (
+        <SessionProvider session={session}>
+            <ResponsiveSidebarLayout>{children}</ResponsiveSidebarLayout>
+        </SessionProvider>
+    );
 }

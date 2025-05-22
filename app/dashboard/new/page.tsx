@@ -92,13 +92,13 @@ export default function NewContentPage() {
             const adaptedFormData = {
                 topic: formData.topic,
                 contentType: formData.contentType,
-                // Only include keywords if not LinkedIn post
                 keywords:
                     formData.contentType === 'linkedin-post'
                         ? ''
                         : formData?.keywords?.join(', '),
                 tone_of_voice: formData.toneOfVoice,
                 target_audience: formData.targetAudience,
+                wordCount: formData.wordLimit
             };
 
             const response = await generateContent(adaptedFormData);

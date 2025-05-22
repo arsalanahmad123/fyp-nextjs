@@ -11,6 +11,7 @@ interface ContentFormData {
     tone_of_voice: string;
     target_audience: string;
     contentGoal?: string;
+    wordCount?: number | null;
 }
 
 interface ContentGenerationResult {
@@ -49,6 +50,7 @@ function createSystemPrompt(data: ContentFormData): string {
         keywords,
         target_audience,
         contentGoal,
+        wordCount,
     } = data;
 
     const keywordList = keywords
@@ -71,7 +73,8 @@ Instructions:
 - Use line breaks for better readability.
 - Write in clear and simple format.
 - End with a question for better engagement.
-- Don't use emojis.
+- Don't use emojis except for expressing some emotion.
+- Minimum length should be 150 words and maximum it can be 500 words.
             `.trim();
             break;
 
@@ -79,10 +82,13 @@ Instructions:
             styleInstructions = `
 Write a blog post in a ${tone_of_voice} tone for ${target_audience}.
 Instructions:
-- Use approx. 1000+ words.
+- Use approx. ${wordCount} words.
 - Optimize for SEO using these keywords: ${keywordList}
 - Use H2, H3 headings and bullet points.
 - Use simple, easy English and human language.
+- Include the primary topic keyword within the first 100 words.
+- Repeat the main keyword naturally 3-5 times throughout.
+- Ensure all provided keywords appear at least once if possible.
             `.trim();
             break;
 
@@ -93,6 +99,9 @@ Act like an expert product copywriter who writes natural, emotional, and high-co
 You are writing for ${target_audience}, and your goal is to ${contentGoal}. Use a ${tone_of_voice} tone.
 
 Integrate these keywords smoothly and naturally throughout the description (without stuffing): ${keywordList}.
+- Include the primary topic keyword within the first 100 words.
+- Repeat the main keyword naturally 3-5 times throughout.
+- Ensure all provided keywords appear at least once if possible.
 
 The product description should follow these strategies — without using headings or making it feel like a list:
 
@@ -100,9 +109,7 @@ The product description should follow these strategies — without using heading
 
     Address pain points or frustrations your buyer might have.
 
-    Gently educate the customer about any unique, technical, or health-related details using simple, easy-to-understand language.
-
-    Include a short real-life scenario or story that helps the reader imagine using the product in daily life.
+    Write about features , how they can help.
 
 ❗ Important style rules:
     Use clear, casual, simple English. Avoid fancy phrases or robotic structure.
@@ -146,7 +153,10 @@ function analyzeContent(
 
     const keywordCounts: Record<string, number> = {};
     keywords.forEach((keyword) => {
-        const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+        const regex = new RegExp(
+            `\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`,
+            'gi'
+        );
         const matches = contentLower.match(regex);
         keywordCounts[keyword] = matches ? matches.length : 0;
     });
@@ -181,7 +191,7 @@ function calculateSeoScore(
     const { wordCount, keywordDensity, readability } = analyzeContent(
         content,
         topic,
-        keywords
+        keywords ?? ''
     );
 
     let score = 100;
@@ -222,7 +232,7 @@ export async function generateContent(
         const targetTokens = words * 1.5;
 
         const response = await openai.chat.completions.create({
-            model: 'gpt-4o',
+            model: 'gpt-4-turbo',
             messages: [
                 { role: 'system', content: systemPrompt },
                 { role: 'user', content: formData.topic },
@@ -234,11 +244,16 @@ export async function generateContent(
         const generatedContent =
             response.choices[0].message.content?.trim() || '';
 
+        if (!generatedContent) {
+            return { success: false, error: 'No content generated.' };
+        }
+
         const analysis = analyzeContent(
             generatedContent,
             formData.topic,
             formData.keywords
         );
+
         const seoScore = calculateSeoScore(
             generatedContent,
             formData.topic,
