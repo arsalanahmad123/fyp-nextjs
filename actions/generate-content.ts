@@ -271,7 +271,7 @@ export async function generateContent(
             topKeywords: analysis.topKeywords,
         };
     } catch (error) {
-        console.error('Content generation error:', error);
+        console.error('Content generation err:', error);
         return {
             success: false,
             error: error instanceof Error ? error.message : 'Unknown error',
