@@ -143,15 +143,17 @@ function analyzeContent(
 
     const contentLower = content.toLowerCase();
 
-    const keywords = keywordsString
-        ? keywordsString
-              .split(',')
-              .map((k) => k.trim().toLowerCase())
-              .filter(Boolean)
-        : [];
+    let keywords: string[] = [];
+    if (keywordsString) {
+        keywords = keywordsString
+            .split(',')
+            .map((k) => k.trim().toLowerCase())
+            .filter(Boolean);
+    }
 
-    if (!keywords.includes(topic.toLowerCase())) {
-        keywords.unshift(topic.toLowerCase());
+    // Fallback if no keywords are given
+    if (keywords.length === 0) {
+        keywords = [topic.toLowerCase()];
     }
 
     const keywordCounts: Record<string, number> = {};
@@ -164,7 +166,9 @@ function analyzeContent(
         keywordCounts[keyword] = matches ? matches.length : 0;
     });
 
-    const primaryKeywordCount = keywordCounts[topic.toLowerCase()] || 0;
+    // Primary keyword is first in keywords list
+    const primaryKeyword = keywords[0];
+    const primaryKeywordCount = keywordCounts[primaryKeyword] || 0;
     const keywordDensity = (primaryKeywordCount / wordCount) * 100;
 
     const sentences = content.split(/[.!?]+/).filter((s) => s.trim());
@@ -194,12 +198,12 @@ function calculateSeoScore(
     const { wordCount, keywordDensity, readability } = analyzeContent(
         content,
         topic,
-        keywords ?? ''
+        keywords
     );
 
     let score = 100;
     const expectedMinWords: Record<string, number> = {
-        'blog-post': 800,
+        'blog-post': 300,
         'product-description': 300,
         'linkedin-post': 150,
     };
@@ -216,7 +220,13 @@ function calculateSeoScore(
     if (readability < 50) score -= 15;
 
     const firstPara = content.split('\n\n')[0].toLowerCase();
-    if (!firstPara.includes(topic.toLowerCase())) score -= 10;
+    const firstKeyword =
+        keywords
+            ?.split(',')
+            .map((k) => k.trim().toLowerCase())
+            .filter(Boolean)[0] || topic.toLowerCase();
+
+    if (!firstPara.includes(firstKeyword)) score -= 10;
 
     return Math.max(0, Math.min(100, score));
 }
