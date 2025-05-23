@@ -1,0 +1,96 @@
+[
+    {
+        "topic": "The Rise of Serverless Architecture",
+        "contentType": "blog-post",
+        "keywords": [
+            "serverless",
+            "cloud computing",
+            "AWS Lambda",
+            "microservices"
+        ],
+        "toneOfVoice": "professional",
+        "targetAudience": "software engineers and CTOs",
+        "wordLimit": 1200,
+        "contentGoal": "inform"
+    },
+    {
+        "topic": "Understanding Compound Interest for Beginners",
+        "contentType": "blog-post",
+        "keywords": ["compound interest", "savings", "financial literacy"],
+        "toneOfVoice": "friendly and clear",
+        "targetAudience": "young adults and students",
+        "wordLimit": 1000,
+        "contentGoal": "educate"
+    },
+    {
+        "topic": "10 Proven Ways to Sleep Better at Night",
+        "contentType": "blog-post",
+        "keywords": ["sleep tips", "insomnia remedies", "better sleep"],
+        "toneOfVoice": "conversational",
+        "targetAudience": "working professionals",
+        "wordLimit": 900,
+        "contentGoal": "rank-on-google"
+    },
+    {
+        "topic": "Wireless Ergonomic Keyboard",
+        "contentType": "product-description",
+        "keywords": [
+            "ergonomic keyboard",
+            "wireless typing",
+            "comfortable keyboard"
+        ],
+        "toneOfVoice": "persuasive",
+        "targetAudience": "remote workers and gamers",
+        "wordLimit": 250,
+        "contentGoal": "sell"
+    },
+    {
+        "topic": "Reusable Bamboo Water Bottle",
+        "contentType": "product-description",
+        "keywords": [
+            "eco-friendly bottle",
+            "sustainable product",
+            "bamboo water bottle"
+        ],
+        "toneOfVoice": "inspiring and informative",
+        "targetAudience": "environment-conscious consumers",
+        "wordLimit": 200,
+        "contentGoal": "educate"
+    },
+    {
+        "topic": "Noise Cancelling Headphones",
+        "contentType": "product-description",
+        "keywords": ["noise cancelling", "headphones", "wireless audio"],
+        "toneOfVoice": "crisp and clear",
+        "targetAudience": "music lovers and travelers",
+        "wordLimit": 300,
+        "contentGoal": "rank-on-google"
+    },
+    {
+        "topic": "How Daily Journaling Improved My Focus as a Developer",
+        "contentType": "linkedin-post",
+        "keywords": ["productivity", "developer habits", "journaling"],
+        "toneOfVoice": "authentic and reflective",
+        "targetAudience": "tech professionals and students",
+        "wordLimit": 600,
+        "contentGoal": "inform"
+    },
+    {
+        "topic": "Introducing Our AI-Powered Resume Builder",
+        "contentType": "linkedin-post",
+        "keywords": ["resume builder", "AI tools", "career boost"],
+        "toneOfVoice": "enthusiastic and persuasive",
+        "targetAudience": "job seekers and career coaches",
+        "wordLimit": 500,
+        "contentGoal": "sell"
+    },
+    {
+        "topic": "5 Quick SEO Fixes That Can Skyrocket Your Blog Traffic",
+        "contentType": "linkedin-post",
+        "keywords": ["SEO tips", "blog traffic", "digital marketing"],
+        "toneOfVoice": "engaging and practical",
+        "targetAudience": "content creators and marketers",
+        "wordLimit": 550,
+        "contentGoal": "educate"
+    }
+]

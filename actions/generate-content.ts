@@ -83,12 +83,15 @@ Instructions:
 Write a blog post in a ${tone_of_voice} tone for ${target_audience}.
 Instructions:
 - Use approx. ${wordCount} words.
-- Optimize for SEO using these keywords: ${keywordList}
+- Optimize for SEO using these keywords: ${keywordList} ,also must include all these keywords inside the content technically.
 - Use H2, H3 headings and bullet points.
 - Use simple, easy English and human language.
 - Include the primary topic keyword within the first 100 words.
 - Repeat the main keyword naturally 3-5 times throughout.
 - Ensure all provided keywords appear at least once if possible.
+- Use medium, simple sentences with very easy english.
+- Use line breaks for better readability.
+- Write in clear and simple format.
             `.trim();
             break;
 
@@ -102,12 +105,12 @@ Integrate these keywords smoothly and naturally throughout the description (with
 - Include the primary topic keyword within the first 100 words.
 - Repeat the main keyword naturally 3-5 times throughout.
 - Ensure all provided keywords appear at least once if possible.
+- Use medium, simple sentences with very easy english.
+- Write in clear and simple format.
 
 The product description should follow these strategies — without using headings or making it feel like a list:
 
     Turn key features into clear, simple benefits the customer will care about.
-
-    Address pain points or frustrations your buyer might have.
 
     Write about features , how they can help.
 
